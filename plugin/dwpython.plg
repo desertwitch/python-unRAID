@@ -86,7 +86,7 @@ exit 0
 <INLINE>
 if [ -x /etc/dwpython/autoexec.sh ]; then
     echo "Executing 'autoexec.sh' script in background (check SYSLOG)..."
-    (/etc/dwpython/autoexec.sh | logger -t "dwpython.autoexec") &amp;>/dev/null &amp;
+    (/etc/dwpython/autoexec.sh 2>&amp;1 | logger -t "dwpython.autoexec") &amp;
 fi
 echo ""
 echo "-------------------------------------------------------------"
