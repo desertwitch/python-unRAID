@@ -109,6 +109,7 @@ echo ""
 removepkg --terse &plgPATH;/*.txz
 rm -rf &plgPATH;/*.txz
 rm -rf &emhttp;
+rm -rf /etc/dwpython
 echo ""
 echo "-----------------------------------------------------------"
 echo " Python 3 for UNRAID has been removed."
