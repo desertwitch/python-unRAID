@@ -20,18 +20,17 @@
 $return = [];
 
 function startsWith($string, $startString) {
-    // Use substr to extract the start of the string and compare it with the given start string
     return substr($string, 0, strlen($startString)) === $startString;
 }
 
 if(isset($_GET['editfile'])) {
     try {
-        if(!startsWith($_GET['editfile'], "/boot/config/plugins/dwpython/")) {
+        $file = $_GET['editfile'];
+        if(!startsWith($file, "/boot/config/plugins/dwpython/")) {
             $return = [];
             $return["error"]["response"] = "File location is not allowed.";
             die(json_encode($return));
         }
-        $file = $_GET['editfile'];
         if(file_exists($file)) {
             $filecontents = file_get_contents($file);
             if($filecontents !== false) {
@@ -53,6 +52,6 @@ if(isset($_GET['editfile'])) {
         $return = [];
         $return["error"]["response"] = $e->getMessage();
     }
-    echo json_encode($return); 
+    echo json_encode($return);
 }
 ?>

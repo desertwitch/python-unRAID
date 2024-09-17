@@ -20,24 +20,22 @@
 $return = [];
 
 function startsWith($string, $startString) {
-    // Use substr to extract the start of the string and compare it with the given start string
     return substr($string, 0, strlen($startString)) === $startString;
 }
 
 if(isset($_POST['editfile']) && isset($_POST['editdata'])) {
     try {
-        if(!startsWith($_POST['editfile'], "/boot/config/plugins/dwpython/")) {
+        $editfile = $_POST['editfile'];
+        if(!startsWith($editfile, "/boot/config/plugins/dwpython/")) {
             $return = [];
             $return["error"]["response"] = "File location is not allowed.";
             die(json_encode($return));
         }
-        $editfile  = $_POST['editfile'];
-        $editdata  = str_replace("\r", '', $_POST['editdata']);
-
-        if(file_put_contents($editfile, $editdata) === false) {
-            $return["error"]["response"] = "Failed to create file.";
-        } else {
+        $editdata = str_replace("\r", '', $_POST['editdata']);
+        if(file_put_contents($editfile, $editdata) !== false) {
             $return["success"]["response"] = $editfile;
+        } else {
+            $return["error"]["response"] = "Failed to create file.";
         }
     }
     catch (\Throwable $t) {
