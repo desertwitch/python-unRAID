@@ -24,7 +24,7 @@ if(isset($_POST['editfile']) && isset($_POST['editdata'])) {
             $editfile  = $_POST['editfile'];
             $editdata  = str_replace("\r", '', $_POST['editdata']);
             $bootpath  = '/boot/config/plugins/dwpython/scripts/';
-            $bootfile  = $plgpath.basename($editfile);
+            $bootfile  = $bootpath.basename($editfile);
             if(!is_dir($bootpath)){
                 if(!mkdir($bootpath)) {
                     $return = [];

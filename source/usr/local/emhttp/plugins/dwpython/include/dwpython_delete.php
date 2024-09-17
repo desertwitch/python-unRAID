@@ -23,7 +23,7 @@ if(isset($_POST['deletefile'])) {
     try {
             $deletefile = $_POST['deletefile'];
             $bootpath   = '/boot/config/plugins/dwpython/scripts/';
-            $bootfile   = $plgpath.basename($deletefile);
+            $bootfile   = $bootpath.basename($deletefile);
             if(!file_exists($deletefile)){
                 $return = [];
                 $return["error"]["response"] = "File does not exist on local system.";
