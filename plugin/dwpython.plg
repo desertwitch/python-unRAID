@@ -80,7 +80,10 @@ echo ""
 
 <FILE Run="/bin/bash" Method="remove">
 <INLINE>
-removepkg &plgPATH;/*.txz
+echo "Uninstalling, this may take a long time..."
+echo "KEEP THIS WINDOW OPEN UNTIL UNINSTALLATION IS COMPLETE"
+echo
+removepkg --terse &plgPATH;/*.txz
 rm -rf &plgPATH;
 rm -rf &emhttp;
 echo ""
