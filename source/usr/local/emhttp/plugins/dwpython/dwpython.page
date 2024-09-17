@@ -53,7 +53,7 @@ If, after any reboots, you do not want to manually re-install such packages you 
 <table class="tablesorter">
 <thead>
 <tr>
-<th>Python Startup Script Editor</th>
+<th>Python Auto-Execution Script Editor</th>
 </tr>
 </thead>
 </table>
@@ -107,11 +107,14 @@ $(function() {
                 if(data.success.response) {
                     editor.setValue(data.success.response);
                 } else {
-                    editor.setValue("(empty file)");
+                    editor.setValue("(The loaded file has no contents.)");
                 }
             }
-            if(data.error && data.error.response) {
-                editor.setValue(data.error.response);
+            else if(data.error && data.error.response) {
+                editor.setValue("(" + data.error.response + ")");
+            }
+            else {
+                editor.setValue("(An unknown error has occured.)");
             }
         }, 'json');
     });
@@ -125,11 +128,14 @@ $(function() {
             if(data.success.response) {
                 editor.setValue(data.success.response);
             } else {
-                editor.setValue("(empty file)");
+                editor.setValue("(The loaded file has no contents.)");
             }
         }
-        if(data.error && data.error.response) {
-            editor.setValue(data.error.response);
+        else if(data.error && data.error.response) {
+            editor.setValue("(" + data.error.response + ")");
+        }
+        else {
+            editor.setValue("(An unknown error has occured.)");
         }
     }, 'json');
 
@@ -138,7 +144,7 @@ $(function() {
         $.post('/plugins/dwpython/include/dwpython_save.php', $('#editform').serializeArray(), function(data) {
             var Title = 'Configuration ';
 
-            if(data.success && data.success.response)
+            if(data.success && data.success.response) {
                 swal({
                     title: Title + 'Saved',
                     text: 'The configuration was saved with success:<br><br><span style="font-weight:bold;">' + data.success.response + '</span>',
@@ -147,13 +153,21 @@ $(function() {
                     html: true,
                     type: 'success'
                 });
-            if(data.error && data.error.response)
+            } else if(data.error && data.error.response) {
                 swal({
                     title: Title + 'Error',
                     text: 'There was an error saving the configuration:<br><br><span style="font-weight:bold;">' + data.error.response + '</span>',
                     html: true,
                     type: 'error'
                 });
+            } else {
+                swal({
+                    title: Title + 'Error',
+                    text: 'There was an unknown error saving the configuration.',
+                    html: true,
+                    type: 'error'
+                });
+            }
         }, 'json');
     });
 });
