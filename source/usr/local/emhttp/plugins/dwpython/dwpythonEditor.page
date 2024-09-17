@@ -89,7 +89,7 @@ $(function() {
                 if(data.success.response) {
                     editor.setValue(data.success.response);
                 } else {
-                    editor.setValue("");
+                    editor.setValue("(empty file)");
                 }
             }
             if(data.error && data.error.response) {
@@ -184,7 +184,7 @@ $(function() {
         } else {
             swal({
                 title: 'Operation Failure',
-                text: 'You cannot delete .sh files',
+                text: 'You can only delete Python script files using this function.',
                 type: 'error'
             });  
         }
