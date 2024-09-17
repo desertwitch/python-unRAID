@@ -26,7 +26,7 @@ function startsWith($string, $startString) {
 
 if(isset($_GET['editfile'])) {
     try {
-        if(!startsWith($_POST['editfile'], "/etc/dwpython/")) {
+        if(!startsWith($_GET['editfile'], "/etc/dwpython/")) {
             $return = [];
             $return["error"]["response"] = "File location is not allowed.";
             die(json_encode($return));
