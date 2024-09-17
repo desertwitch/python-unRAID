@@ -41,7 +41,7 @@ $(function() {
     $('#btnReset').click(function() {
         swal({
                 title: "Are you sure?",
-                text: "All your scripts will be <u>deleted</u> in the process.<br>This includes any and all files in <span style='font-weight:bold;'>/etc/dwpython/</span>.<br>This process does not touch (pip) installed packages.",
+                text: "All your scripts will be <u>deleted</u> in the process.<br>This includes any and all files in <span style='font-weight:bold;'>/etc/dwpython/</span>.<br>This process does not touch installed packages (use pip for that).",
                 type: "error",
                 showCancelButton: true,
                 confirmButtonText: "Reset Plugin",
