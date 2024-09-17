@@ -1,0 +1,6 @@
+#!/bin/bash
+echo "Backing up local scripts folder to USB..."
+mkdir -p /boot/config/plugins/dwpython/scripts
+rm -rf /boot/config/plugins/dwpython/scripts/*
+cp -rf /etc/dwpython/* /boot/config/plugins/dwpython/scripts/
+echo "---> DONE"

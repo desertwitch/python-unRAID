@@ -39,6 +39,7 @@ Markdown="false"
 <span style="float:right">
 <input type="button" value="Create File" id="btnCreate" />
 <input type="button" value="Delete File" id="btnDelete" />
+<input type="button" value="Backup to USB" id="btnBackup" />
 </span><br>
 
 <img id="editfolder" style="cursor:pointer;margin-left: 10px;" src="/webGui/images/explore.png" >
@@ -197,6 +198,10 @@ $(function() {
                     type: 'error'
                 });
         }, 'json');
+    });
+
+    $('#btnBackup').click(function(){
+        openBox('/plugins/dwpython/scripts/backup', 'Python3 USB Backup', 600, 600, false);
     });
 });
 </script>
