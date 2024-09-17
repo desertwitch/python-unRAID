@@ -1,5 +1,7 @@
-Menu="dwpythonSettings:1"
-Title="Python3 Scripting Editor"
+Menu="OtherSettings"
+Type="xmenu"
+Title="Python 3"
+Icon="code"
 Tag="code"
 Markdown="false"
 ---
@@ -64,7 +66,7 @@ Markdown="false"
 <script type="text/javascript">
 $(function() {
     $('#btnCancel').click(function() {
-        location = '/Settings/dwpythonSettings';
+        location = '/Settings/dwpython';
     });
 
     var editor = CodeMirror.fromTextArea($('#editdata')[0], {
@@ -128,7 +130,7 @@ $(function() {
                                         type: 'success'
                                     },
                                     function() {
-                                        location = '/Settings/dwpythonSettings';
+                                        location = '/Settings/dwpython';
                                     });
                             }
                             if(data.error && data.error.response) {
@@ -168,7 +170,7 @@ $(function() {
                                 type: 'success'
                             },
                             function() {
-                                location = '/Settings/dwpythonSettings';
+                                location = '/Settings/dwpython';
                             });
                     }
                     if(data.error && data.error.response) {
