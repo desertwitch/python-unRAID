@@ -122,7 +122,7 @@ $(function() {
                             if(data.success && data.success.response) {
                                 swal({
                                         title: Title + 'Created',
-                                        text: data.success.response,
+                                        text: 'The file was created with success:\n\n' + data.success.response,
                                         timer: 2000,
                                         showConfirmButton: false,
                                         type: 'success'
@@ -162,7 +162,7 @@ $(function() {
                     if(data.success && data.success.response) {
                         swal({
                                 title: Title + 'Deleted',
-                                text: data.success.response,
+                                text: 'The file was deleted with success:\n\n' + data.success.response,
                                 timer: 2000,
                                 showConfirmButton: false,
                                 type: 'success'
@@ -190,7 +190,7 @@ $(function() {
             if(data.success && data.success.response)
                 swal({
                     title: Title + 'Saved',
-                    text: data.success.response,
+                    text: 'The file was saved with success:\n\n' + data.success.response,
                     timer: 2000,
                     showConfirmButton: false,
                     type: 'success'
