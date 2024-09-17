@@ -26,8 +26,8 @@ Markdown="false"
  */
 ?>
 <link type="text/css" rel="stylesheet" href="<?=autov('/webGui/styles/jquery.filetree.css');?>">
-<link type="text/css" rel="stylesheet" href="<?=autov('/plugins/dwsnap/css/codemirror.min.css');?>">
-<link type="text/css" rel="stylesheet" href="<?=autov('/plugins/dwsnap/css/dracula.min.css');?>">
+<link type="text/css" rel="stylesheet" href="<?=autov('/plugins/dwpython/css/codemirror.min.css');?>">
+<link type="text/css" rel="stylesheet" href="<?=autov('/plugins/dwpython/css/dracula.min.css');?>">
 <style type="text/css">
     .CodeMirror { border: 1px solid #eee; cursor: text; margin-top: 15px; margin-bottom: 10px; }
     .CodeMirror pre.CodeMirror-placeholder { color: #999; }
@@ -55,9 +55,9 @@ Markdown="false"
 </form>
 
 <script src="<?=autov('/webGui/javascript/jquery.filetree.js');?>"></script>
-<script src="<?=autov('/plugins/dwsnap/js/codemirror.min.js');?>"></script>
-<script src="<?=autov('/plugins/dwsnap/js/autorefresh.min.js');?>"></script>
-<script src="<?=autov('/plugins/dwsnap/js/python.min.js');?>"></script>
+<script src="<?=autov('/plugins/dwpython/js/codemirror.min.js');?>"></script>
+<script src="<?=autov('/plugins/dwpython/js/autorefresh.min.js');?>"></script>
+<script src="<?=autov('/plugins/dwpython/js/python.min.js');?>"></script>
 
 <script type="text/javascript">
 $(function(){
