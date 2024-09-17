@@ -58,6 +58,10 @@ If, after any reboots, you do not want to manually re-install any such <strong>g
 </thead>
 </table>
 
+<div><strong>
+Please keep in mind that using virtual environments is always preferable over globally installing any Python packages.<br>
+A virtual environment within a disk-located folder will persist reboots and not decrease your operating system's disk space.
+</strong></div><br>
 
 <form id="editform" method="POST">
 
