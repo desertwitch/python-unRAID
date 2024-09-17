@@ -16,6 +16,6 @@ cp -n $DOCROOT/default.cfg $BOOT/dwpython.cfg >/dev/null 2>&1
 # copy default script files to flash drive, if no backups exist there
 cp -nr $DOCROOT/defaults/* $BOOT/scripts/ >/dev/null 2>&1
 
-# copy auto-execution script to RAM and make executable
+# copy auto-execution script to RAM and make executable for post-install
 cp -f $BOOT/scripts/autoexec.sh /tmp/dwpython-autoexec.sh
 chmod 755 /tmp/dwpython-autoexec.sh
