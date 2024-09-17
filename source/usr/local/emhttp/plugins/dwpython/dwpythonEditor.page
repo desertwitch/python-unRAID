@@ -101,17 +101,17 @@ $(function() {
     $('#btnCreate').click(function() {
         swal({
                 title: "New File",
-                text: "Please choose a name for your file (including extension):<br>It will be placed in the root folder: /etc/dwpython/",
+                text: "Please choose a name for your file (including extension):<br>It will be placed in the root folder: <span style='font-weight:bold;'>/etc/dwpython/</span>",
                 type: "input",
                 showCancelButton: true,
                 confirmButtonText: "Create File",
                 html: true,
-                inputPlaceholder: "Alphanumeric - no spaces or special characters!",
+                inputPlaceholder: "[a-z, A-Z, 0-9, -, .]",
                 closeOnConfirm: false
             },
             function(value) {
                 if(value !== false && value !== "") {
-                    var format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,<>\/?~]/;
+                    var format = /[ `!@#$%^&*()_+\=\[\]{};':"\\|,<>\/?~]/;
                     if(format.test(value)) {
                         swal("Operation Failure", "The chosen file name contained disallowed characters.", "error");
                     } else {
