@@ -7,6 +7,8 @@
 <!ENTITY gitURL    "https://raw.githubusercontent.com/&author;/python-unRAID/main">
 <!ENTITY pluginURL "&gitURL;/plugin/&name;.plg">
 <!ENTITY pkgURL    "&gitURL;/packages">
+<!ENTITY plgNAME   "dwsnap-2024.09.16-x86_64-1">
+<!ENTITY plgMD5    "aa4ce7673266caedeb43ebafef1b5cec">
 <!ENTITY plgPATH   "/boot/config/plugins/&name;">
 <!ENTITY emhttp    "/usr/local/emhttp/plugins/&name;">
 ]>
@@ -73,6 +75,11 @@ exit 0
 <FILE Name="&plgPATH;/python-setuptools-75.1.0-x86_64-1.txz" Min="6.13.0" Run="upgradepkg --install-new">
 <URL>&pkgURL;/python-setuptools-75.1.0-x86_64-1.txz</URL>
 <MD5>c78878faa4210fca2e983da272d71049</MD5>
+</FILE>
+
+<FILE Name="&plgPATH;/&plgNAME;.txz" Min="6.11.0" Run="upgradepkg --install-new">
+<URL>&gitURL;/archive/&plgNAME;.txz</URL>
+<MD5>&plgMD5;</MD5>
 </FILE>
 
 <FILE Run="/bin/bash">
