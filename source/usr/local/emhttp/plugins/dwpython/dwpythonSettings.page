@@ -10,7 +10,7 @@ Markdown="false"
     <dl>
         <dt>Plugin Usage Metric Functions:</dt>
         <dd>
-            <select class="" name="METRICSAPI" size="1">
+            <select name="METRICSAPI" size="1">
                 <?=mk_option($dwpython_metricsapi, 'disable', 'No');?>
                 <?=mk_option($dwpython_metricsapi, 'enable', 'Yes');?>
             </select>
@@ -20,13 +20,12 @@ Markdown="false"
     <blockquote class="inline_help">
         <p>Enables collection of <strong>anonymized</strong> plugin usage statistics through the plugin usage metrics API.</p>
         <p>This aids prioritization of bug reports, development of new features and planning for plugin updates/deprecation.</p>
-        <p><em>Attributes: Metric ID, Plugin Version, Unraid Version, Python Backend Version, Python Script File Count, Autoexec Script Line Count</em></p> 
+        <p><em>Attributes: Metric ID, Plugin Version, Unraid Version, Python Backend Version, Autoexec Script Line Count</em></p> 
         <p><strong><i class="fa fa-heart" style="color:red;"></i> If possible, please keep this setting <u>enabled</u> to support the continued development of this plugin - thank you!</strong></p>
     </blockquote>
 
     <dl>
         <dt>
-            <input type="button" id="btnReset" value="Reset Plugin">
             <input type="submit" name="#default" value="Default">
         </dt>
         <dd>
@@ -35,20 +34,3 @@ Markdown="false"
         </dd>
     </dl>
 </form>
-
-<script type="text/javascript">
-$(function() {
-    $('#btnReset').click(function() {
-        swal({
-                title: "Are you sure?",
-                text: "All your scripts will be <u>deleted</u> in the process.<br>This includes any and all files in <span style='font-weight:bold;'>/etc/dwpython/</span>.<br><br>This <u>does not</u> touch installed packages (use pip/reboot for that).",
-                type: "error",
-                showCancelButton: true,
-                confirmButtonText: "Reset Plugin",
-                html: true
-            }, function() {
-                openBox('/plugins/dwpython/scripts/reset', 'Python3 Plugin Reset', 200, 200, true);
-            });
-    });
-});
-</script>

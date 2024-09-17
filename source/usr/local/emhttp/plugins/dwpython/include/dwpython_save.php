@@ -26,32 +26,20 @@ function startsWith($string, $startString) {
 
 if(isset($_POST['editfile']) && isset($_POST['editdata'])) {
     try {
-            if(!startsWith($_POST['editfile'], "/etc/dwpython/")) {
+            if(!startsWith($_POST['editfile'], "/boot/config/plugins/dwpython/")) {
                 $return = [];
                 $return["error"]["response"] = "File location is not allowed.";
                 die(json_encode($return));
             }
             $editfile  = $_POST['editfile'];
             $editdata  = str_replace("\r", '', $_POST['editdata']);
-            $bootpath  = '/boot/config/plugins/dwpython/scripts/';
-            $bootfile  = $bootpath.basename($editfile);
-            if(!is_dir($bootpath)){
-                if(!mkdir($bootpath)) {
-                    $return = [];
-                    $return["error"]["response"] = "Failed to create folder on USB flashdrive.";
-                    die(json_encode($return));
-                }
-            }
+
             if(file_put_contents($editfile, $editdata) === false) {
                 $return = [];
-                $return["error"]["response"] = "Failed to create file on local system.";
+                $return["error"]["response"] = "Failed to create file.";
                 die(json_encode($return));
             }
-            if(file_put_contents($bootfile, $editdata) === false) {
-                $return = [];
-                $return["error"]["response"] = "Failed to create file on USB flashdrive.";
-                die(json_encode($return));
-            }
+
             $return["success"]["response"] = $editfile;
     }
     catch (\Throwable $t) {

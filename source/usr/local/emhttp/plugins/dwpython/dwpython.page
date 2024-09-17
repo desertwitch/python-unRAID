@@ -33,7 +33,7 @@ Markdown="false"
     .CodeMirror pre.CodeMirror-placeholder { color: #999; }
     .errortext {color: #EF3D47;display: none;}
     .fileTree {color:#486dba;width:305px;max-height:150px;overflow:scroll;position:absolute;z-index:100;display:none;}
-    #editfile { width:600px; }
+    #editfile { width:300px; }
 </style>
 
 <table class="tablesorter shift">
@@ -46,7 +46,6 @@ Markdown="false"
 
 <div>
 This plugin aims to provide a simple and functional <strong>python3</strong> installation, including <strong>pip</strong> and <strong>setuptools</strong> for any package needs.<br>
-For your convenience a script folder is present at <strong>/etc/dwpython/</strong>, on system shutdown <u>this folder is backed up to USB and restored into that location</u> at the next boot.<br><br>
 Since Python is rather invasive on the system, all package installations themselves are only kept in RAM and it is possible to easily revert any brokenness by rebooting the system.<br>
 If, after any reboots, you do not want to manually re-install such packages you might need, you can put respective <strong>pip</strong> commands in the provided <strong>/etc/dwpython/autoexec.sh</strong> file.
 </div><br>
@@ -54,7 +53,7 @@ If, after any reboots, you do not want to manually re-install such packages you 
 <table class="tablesorter">
 <thead>
 <tr>
-<th>Python Scripting Editor</th>
+<th>Python Autoexec Editor</th>
 </tr>
 </thead>
 </table>
@@ -62,16 +61,10 @@ If, after any reboots, you do not want to manually re-install such packages you 
 
 <form id="editform" method="POST">
 
-<span style="float:right">
-<input type="button" value="Create File" id="btnCreate" />
-<input type="button" value="Delete File" id="btnDelete" />
-<input type="button" value="Backup Script Folder to USB" id="btnBackup" />
-</span><br>
-
 <img id="editfolder" style="cursor:pointer;margin-left: 10px;" src="/webGui/images/explore.png" >
-<input id="editfile" type="text" name="editfile" value="" readonly="" data-picktop="/etc/dwpython" data-pickcloseonfile="true" data-pickfilter="" data-pickroot="/etc/dwpython" data-pickfolders="true" required="required" >
+<input id="editfile" type="text" name="editfile" value="" readonly="" data-picktop="/boot/config/plugins/dwpython/scripts" data-pickcloseonfile="true" data-pickfilter="sh" data-pickroot="/boot/config/plugins/dwpython/scripts" data-pickfolders="false" required="required" >
 
-<textarea id="editdata" name="editdata" placeholder="Select a file to edit by clicking into the above textbox..."></textarea>
+<textarea id="editdata" name="editdata"></textarea>
 <input type="hidden" name="commit" value="1" />
 
 <span style="margin-left:20px;">
@@ -84,8 +77,7 @@ If, after any reboots, you do not want to manually re-install such packages you 
 <script src="<?=autov('/webGui/javascript/jquery.filetree.js');?>"></script>
 <script src="<?=autov('/plugins/dwpython/js/codemirror.min.js');?>"></script>
 <script src="<?=autov('/plugins/dwpython/js/autorefresh.min.js');?>"></script>
-<script src="<?=autov('/plugins/dwpython/js/placeholder.min.js');?>"></script>
-<script src="<?=autov('/plugins/dwpython/js/python.min.js');?>"></script>
+<script src="<?=autov('/plugins/dwpython/js/shell.min.js');?>"></script>
 
 <script type="text/javascript">
 $(function() {
@@ -95,7 +87,7 @@ $(function() {
 
     var editor = CodeMirror.fromTextArea($('#editdata')[0], {
         theme: '<?=($display["theme"] == 'white' || $display["theme"] == 'azure') ? "default" : "dracula";?>',
-        mode: 'python',
+        mode: 'shell',
         lineNumbers: true,
         autoRefresh: true
     });
@@ -108,7 +100,7 @@ $(function() {
 
     $('#editfile').on('change', function() {
         var Editfile = $('#editfile').val();
-        $.getJSON('/plugins/dwpython/include/dwpython_edit.php', {
+        $.get('/plugins/dwpython/include/dwpython_edit.php', {
             editfile: Editfile
         }, function(data) {
             if(data.success) {
@@ -121,106 +113,35 @@ $(function() {
             if(data.error && data.error.response) {
                 editor.setValue(data.error.response);
             }
-        });
+        }, 'json');
     });
 
-    $('#btnCreate').click(function() {
-        swal({
-                title: "New File",
-                text: "Please choose a name for your file (including extension):<br>It will be placed in the root folder: <span style='font-weight:bold;'>/etc/dwpython/</span>",
-                type: "input",
-                showCancelButton: true,
-                confirmButtonText: "Create File",
-                html: true,
-                inputPlaceholder: "[a-z, A-Z, 0-9, -, .]",
-                closeOnConfirm: false
-            },
-            function(value) {
-                if(value !== false && value !== "") {
-                    var format = /[ `!@#$%^&*()_+\=\[\]{};':"\\|,<>\/?~]/;
-                    if(format.test(value)) {
-                        swal("Operation Failure", "The chosen file name contained disallowed characters.", "error");
-                    } else {
-                        $.post('/plugins/dwpython/include/dwpython_create.php', {
-                            newfile: value
-                        }, function(data) {
-                            var Title = 'File ';
-                            if(data.success && data.success.response) {
-                                swal({
-                                        title: Title + 'Created',
-                                        text: 'The file was created with success:<br><br><span style="font-weight:bold;">' + data.success.response + '</span>',
-                                        timer: 2000,
-                                        showConfirmButton: false,
-                                        html: true,
-                                        type: 'success'
-                                    },
-                                    function() {
-                                        location = '/Settings/dwpython';
-                                    });
-                            }
-                            if(data.error && data.error.response) {
-                                swal({
-                                    title: Title + 'Error',
-                                    text: 'There was an error creating the file:<br><br><span style="font-weight:bold;">' + data.error.response + '</span>',
-                                    type: 'error',
-                                    html: true
-                                });
-                            }
-                        }, 'json');
-                    }
-                }
-            });
-    });
-
-    $('#btnDelete').click(function() {
-        swal({
-                title: "Are you sure?",
-                text: "This action will <u>delete</u> the file:<br><br><span style='font-weight:bold'>" + $('#editfile').val() + "</span>",
-                type: "error",
-                showCancelButton: true,
-                confirmButtonText: "Delete File",
-                closeOnConfirm: false,
-                html: true
-            },
-            function() {
-                $.post('/plugins/dwpython/include/dwpython_delete.php', {
-                    deletefile: $('#editfile').val()
-                }, function(data) {
-                    var Title = 'File ';
-                    if(data.success && data.success.response) {
-                        swal({
-                                title: Title + 'Deleted',
-                                text: 'The file was deleted with success:<br><br><span style="font-weight:bold;">' + data.success.response + '</span>',
-                                timer: 2000,
-                                showConfirmButton: false,
-                                html: true,
-                                type: 'success'
-                            },
-                            function() {
-                                location = '/Settings/dwpython';
-                            });
-                    }
-                    if(data.error && data.error.response) {
-                        swal({
-                            title: Title + 'Error',
-                            text: 'There was an error deleting the file:<br><br><span style="font-weight:bold;">' + data.error.response + '</span>',
-                            html: true,
-                            type: 'error'
-                        });
-                    }
-                }, 'json');
-            });
-    });
+    $('#editfile').val("/boot/config/plugins/dwpython/scripts/autoexec.sh");
+    var EditfileDefault = $('#editfile').val();
+    $.get('/plugins/dwpython/include/dwpython_edit.php', {
+        editfile: Editfile
+    }, function(data) {
+        if(data.success) {
+            if(data.success.response) {
+                editor.setValue(data.success.response);
+            } else {
+                editor.setValue("(empty file)");
+            }
+        }
+        if(data.error && data.error.response) {
+            editor.setValue(data.error.response);
+        }
+    }, 'json');
 
     $('#btnSubmit').click(function() {
         editor.save();
         $.post('/plugins/dwpython/include/dwpython_save.php', $('#editform').serializeArray(), function(data) {
-            var Title = 'File ';
+            var Title = 'Configuration ';
 
             if(data.success && data.success.response)
                 swal({
                     title: Title + 'Saved',
-                    text: 'The file was saved with success:<br><br><span style="font-weight:bold;">' + data.success.response + '</span>',
+                    text: 'The configuration was saved with success:<br><br><span style="font-weight:bold;">' + data.success.response + '</span>',
                     timer: 2000,
                     showConfirmButton: false,
                     html: true,
@@ -229,15 +150,11 @@ $(function() {
             if(data.error && data.error.response)
                 swal({
                     title: Title + 'Error',
-                    text: 'There was an error saving the file:<br><br><span style="font-weight:bold;">' + data.error.response + '</span>',
+                    text: 'There was an error saving the configuration:<br><br><span style="font-weight:bold;">' + data.error.response + '</span>',
                     html: true,
                     type: 'error'
                 });
         }, 'json');
-    });
-
-    $('#btnBackup').click(function(){
-        openBox('/plugins/dwpython/scripts/backupnow', 'Python3 USB Backup', 600, 600, false);
     });
 });
 </script>
