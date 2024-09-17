@@ -24,7 +24,7 @@ if(isset($_GET['editfile'])) {
         $file = $_GET['editfile'];
         if(file_exists($file)) {
             $filecontents = file_get_contents($file);
-            if($filecontents) {
+            if($filecontents !== false) {
                 $return["success"]["response"] = $filecontents;
             } else {
                 $return["error"]["response"] = "Could not get file contents";
