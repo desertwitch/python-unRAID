@@ -41,10 +41,12 @@ if(isset($_POST['editfile']) && isset($_POST['editdata'])) {
         }
     }
     catch (\Throwable $t) {
+        error_log($t);
         $return = [];
         $return["error"]["response"] = $t->getMessage();
     }
     catch (\Exception $e) {
+        error_log($e);
         $return = [];
         $return["error"]["response"] = $e->getMessage();
     }
