@@ -33,7 +33,7 @@ Markdown="false"
     .CodeMirror pre.CodeMirror-placeholder { color: #999; }
     .errortext {color: #EF3D47;display: none;}
     .fileTree {color:#486dba;width:305px;max-height:150px;overflow:scroll;position:absolute;z-index:100;display:none;}
-    #editfile { width:300px; }
+    #editfile { width:600px; }
 </style>
 
 <table class="tablesorter shift">
@@ -53,7 +53,7 @@ If, after any reboots, you do not want to manually re-install such packages you 
 <table class="tablesorter">
 <thead>
 <tr>
-<th>Python Autoexec Editor</th>
+<th>Python Startup Script Editor</th>
 </tr>
 </thead>
 </table>
@@ -92,7 +92,7 @@ $(function() {
         autoRefresh: true
     });
 
-    editor.setSize(null, 500);
+    editor.setSize(null, 300);
 
     $('#editfile').fileTreeAttach(null, null, function(file) {
         $('#editfile').val(file);
