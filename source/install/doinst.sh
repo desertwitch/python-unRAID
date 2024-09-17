@@ -12,6 +12,9 @@ if [ ! -d $BOOT/scripts ]; then
     mkdir -p $BOOT/scripts
 fi
 
+# copy default settings file if none exists
+cp -n $DOCROOT/default.cfg $BOOT/dwpython.cfg >/dev/null 2>&1
+
 # copy default script files to flash drive, if no backups exist there
 cp -nr $DOCROOT/defaults/* $BOOT/scripts/ >/dev/null 2>&1
 

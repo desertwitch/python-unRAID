@@ -5,3 +5,34 @@ Icon="code"
 Tag="code"
 Markdown="false"
 ---
+<?require_once '/usr/local/emhttp/plugins/dwpython/include/dwpython_config.php';?>
+
+<form markdown="0" id="dwpy-settings" name="dwpy_settings" method="POST" action="/update.php" target="progressFrame">
+<input type="hidden" name="#file" value="dwpython/dwpython.cfg">
+    <dl>
+        <dt>Plugin Usage Metric Functions:</dt>
+        <dd>
+            <select class="" name="METRICSAPI" size="1">
+                <?=mk_option($dwpython_metricsapi, 'disable', 'No');?>
+                <?=mk_option($dwpython_metricsapi, 'enable', 'Yes');?>
+            </select>
+        </dd>
+    </dl>
+
+    <blockquote class="inline_help">
+        <p>Enables collection of <strong>anonymized</strong> plugin usage statistics through the plugin usage metrics API.</p>
+        <p>This aids prioritization of bug reports, development of new features and planning for plugin updates/deprecation.</p>
+        <p><em>Attributes: Metric ID, Plugin Version, Unraid Version, Python Backend Version, Python Script File Count, Autoexec Script Line Count</em></p> 
+        <p><strong><i class="fa fa-heart" style="color:red;"></i> If possible, please keep this setting <u>enabled</u> to support the continued development of this plugin - thank you!</strong></p>
+    </blockquote>
+
+    <dl>
+        <dt>
+            <input type="submit" name="#default" value="Default">
+        </dt>
+        <dd>
+            <input type="submit" name="#apply" value="Apply">
+            <input type="button" value="Done" onclick="done()">
+        </dd>
+    </dl>
+</form>
