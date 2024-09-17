@@ -119,7 +119,7 @@ $(function() {
     $('#editfile').val("/boot/config/plugins/dwpython/scripts/autoexec.sh");
     var EditfileDefault = $('#editfile').val();
     $.get('/plugins/dwpython/include/dwpython_edit.php', {
-        editfile: Editfile
+        editfile: EditfileDefault
     }, function(data) {
         if(data.success) {
             if(data.success.response) {
