@@ -1,4 +1,4 @@
-Menu="Utilities"
+Menu="OtherSettings"
 Type="xmenu"
 Title="Python 3"
 Icon="code"
@@ -35,6 +35,30 @@ Markdown="false"
     .fileTree {color:#486dba;width:305px;max-height:150px;overflow:scroll;position:absolute;z-index:100;display:none;}
     #editfile { width:600px; }
 </style>
+
+<table class="tablesorter shift">
+<thead>
+<tr>
+<th>General Information</th>
+</tr>
+</thead>
+</table>
+
+<div>
+This plugin aims to provide a simple and functional <strong>python3</strong> installation, including <strong>pip</strong> and <strong>setuptools</strong> for any package needs.<br>
+For your convenience a script folder is present at <strong>/etc/dwpython/</strong>, on system shutdown this folder is <u>backed up to USB and restored into that location</u> at the next boot.<br><br>
+Since Python is rather invasive on the system, all package installations themselves are only kept in RAM and it is possible to easily revert any brokenness by rebooting the system.<br>
+If, after any reboots, you do not want to manually re-install such packages you might need, you can put respective <strong>pip</strong> commands in the provided <strong>/etc/dwpython/autoexec.sh</strong> file.
+</div><br>
+
+<table class="tablesorter">
+<thead>
+<tr>
+<th>Python Scripting Editor</th>
+</tr>
+</thead>
+</table>
+
 
 <form id="editform" method="POST">
 
