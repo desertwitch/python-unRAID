@@ -37,10 +37,10 @@ if(isset($_GET['editfile'])) {
             if($filecontents !== false) {
                 $return["success"]["response"] = $filecontents;
             } else {
-                $return["error"]["response"] = "Could not get file contents";
+                $return["error"]["response"] = "Could not get file's contents.";
             }
         } else {
-            $return["error"]["response"] = "File does not exist";
+            $return["error"]["response"] = "File does not exist.";
         }
     }
     catch (\Throwable $t) {

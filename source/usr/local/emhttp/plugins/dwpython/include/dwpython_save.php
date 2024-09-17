@@ -26,31 +26,27 @@ function startsWith($string, $startString) {
 
 if(isset($_POST['editfile']) && isset($_POST['editdata'])) {
     try {
-            if(!startsWith($_POST['editfile'], "/boot/config/plugins/dwpython/")) {
-                $return = [];
-                $return["error"]["response"] = "File location is not allowed.";
-                die(json_encode($return));
-            }
-            $editfile  = $_POST['editfile'];
-            $editdata  = str_replace("\r", '', $_POST['editdata']);
+        if(!startsWith($_POST['editfile'], "/boot/config/plugins/dwpython/")) {
+            $return = [];
+            $return["error"]["response"] = "File location is not allowed.";
+            die(json_encode($return));
+        }
+        $editfile  = $_POST['editfile'];
+        $editdata  = str_replace("\r", '', $_POST['editdata']);
 
-            if(file_put_contents($editfile, $editdata) === false) {
-                $return = [];
-                $return["error"]["response"] = "Failed to create file.";
-                die(json_encode($return));
-            }
-
+        if(file_put_contents($editfile, $editdata) === false) {
+            $return["error"]["response"] = "Failed to create file.";
+        } else {
             $return["success"]["response"] = $editfile;
+        }
     }
     catch (\Throwable $t) {
         $return = [];
         $return["error"]["response"] = $t->getMessage();
-        die(json_encode($return));
     }
     catch (\Exception $e) {
         $return = [];
         $return["error"]["response"] = $e->getMessage();
-        die(json_encode($return));
     }
     echo json_encode($return);
 }
