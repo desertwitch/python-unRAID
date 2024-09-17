@@ -110,6 +110,7 @@ echo ""
 removepkg --terse &plgPATH;/*.txz
 rm -rf &plgPATH;
 rm -rf &emhttp;
+rm -f /tmp/dwpython-autoexec.sh
 
 echo ""
 echo "-----------------------------------------------------------"
