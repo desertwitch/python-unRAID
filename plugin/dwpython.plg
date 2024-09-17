@@ -63,7 +63,7 @@ exit 0
 <INLINE>
 **Python 3 for UNRAID**
 
-Installs Python 3, pip and setuptools onto Unraid systems (use at your own risk).
+Installs python3, pip and setuptools onto Unraid systems (**use at your own risk**).
 </INLINE>
 </FILE>
 
