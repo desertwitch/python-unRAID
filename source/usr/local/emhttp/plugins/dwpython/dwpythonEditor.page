@@ -43,7 +43,7 @@ Markdown="false"
 </span><br>
 
 <img id="editfolder" style="cursor:pointer;margin-left: 10px;" src="/webGui/images/explore.png" >
-<input id="editfile" type="text" name="editfile" value="" readonly="" data-picktop="/etc/dwpython" data-pickcloseonfile="true" data-pickfilter="" data-pickroot="/etc/dwpython" data-pickfolders="false" required="required" >
+<input id="editfile" type="text" name="editfile" value="" readonly="" data-picktop="/etc/dwpython" data-pickcloseonfile="true" data-pickfilter="py,sh" data-pickroot="/etc/dwpython" data-pickfolders="false" required="required" >
 
 <textarea id="editdata" name="editdata" placeholder="Select a file to edit by clicking into the textbox..."></textarea>
 <input type="hidden" name="commit" value="1" />
@@ -114,7 +114,7 @@ $(function() {
                         $.post('/plugins/dwpython/include/dwpython_create.php', {
                             newfile: value
                         }, function(data) {
-                            var Title = 'File ';
+                            var Title = 'Script ';
                             if(data.success && data.success.response) {
                                 swal({
                                         title: Title + 'Created',
@@ -141,47 +141,55 @@ $(function() {
     });
 
     $('#btnDelete').click(function() {
-        swal({
-                title: "Are you sure?",
-                text: "This action will <u>delete</u> the script:<br><br><span style='font-weight:bold'>" + $('#editfile').val() + "</span>",
-                type: "error",
-                showCancelButton: true,
-                confirmButtonText: "Delete Script",
-                closeOnConfirm: false,
-                html: true
-            },
-            function() {
-                $.post('/plugins/dwpython/include/dwpython_delete.php', {
-                    deletefile: $('#editfile').val()
-                }, function(data) {
-                    var Title = 'File ';
-                    if(data.success && data.success.response) {
-                        swal({
-                                title: Title + 'Deleted',
-                                text: data.success.response,
-                                timer: 2000,
-                                showConfirmButton: false,
-                                type: 'success'
-                            },
-                            function() {
-                                location = '/Settings/dwpythonSettings';
+        if(!$('#editfile').val().includes(".sh")) {
+            swal({
+                    title: "Are you sure?",
+                    text: "This action will <u>delete</u> the script:<br><br><span style='font-weight:bold'>" + $('#editfile').val() + "</span>",
+                    type: "error",
+                    showCancelButton: true,
+                    confirmButtonText: "Delete Script",
+                    closeOnConfirm: false,
+                    html: true
+                },
+                function() {
+                    $.post('/plugins/dwpython/include/dwpython_delete.php', {
+                        deletefile: $('#editfile').val()
+                    }, function(data) {
+                        var Title = 'Script ';
+                        if(data.success && data.success.response) {
+                            swal({
+                                    title: Title + 'Deleted',
+                                    text: data.success.response,
+                                    timer: 2000,
+                                    showConfirmButton: false,
+                                    type: 'success'
+                                },
+                                function() {
+                                    location = '/Settings/dwpythonSettings';
+                                });
+                        }
+                        if(data.error && data.error.response) {
+                            swal({
+                                title: Title + 'Error',
+                                text: 'There was an error deleting the file:\n\n' + data.error.response,
+                                type: 'error'
                             });
-                    }
-                    if(data.error && data.error.response) {
-                        swal({
-                            title: Title + 'Error',
-                            text: 'There was an error deleting the file:\n\n' + data.error.response,
-                            type: 'error'
-                        });
-                    }
-                }, 'json');
-            });
+                        }
+                    }, 'json');
+                });
+        } else {
+            swal({
+                title: 'Operation Failure',
+                text: 'You cannot delete .sh files',
+                type: 'error'
+            });  
+        }
     });
 
     $('#btnSubmit').click(function() {
         editor.save();
         $.post('/plugins/dwpython/include/dwpython_save.php', $('#editform').serializeArray(), function(data) {
-            var Title = 'File ';
+            var Title = 'Script ';
 
             if(data.success && data.success.response)
                 swal({

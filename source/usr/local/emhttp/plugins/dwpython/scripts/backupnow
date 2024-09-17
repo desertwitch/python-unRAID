@@ -2,7 +2,10 @@
 echo "Backing up local Python scripts folder to USB..."
 echo "/etc/dwpython/* --> /boot/config/plugins/dwpython/scripts/"
 echo "-----------------------------------------------------------------"
+
 mkdir -p /boot/config/plugins/dwpython/scripts
 rm -rf /boot/config/plugins/dwpython/scripts/*
 cp -rf /etc/dwpython/* /boot/config/plugins/dwpython/scripts/
+cp -nr /usr/local/emhttp/plugins/dwpython/defaults/* /boot/config/plugins/dwpython/scripts/ >/dev/null 2>&1
+
 echo "--> DONE, you can close this window now."
