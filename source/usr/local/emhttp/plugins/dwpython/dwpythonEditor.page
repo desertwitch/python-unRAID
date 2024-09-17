@@ -43,7 +43,7 @@ Markdown="false"
 </span><br>
 
 <img id="editfolder" style="cursor:pointer;margin-left: 10px;" src="/webGui/images/explore.png" >
-<input id="editfile" type="text" name="editfile" value="" readonly="" data-picktop="/etc/dwpython" data-pickcloseonfile="true" data-pickfilter="py" data-pickroot="/etc/dwpython" data-pickfolders="false" required="required" >
+<input id="editfile" type="text" name="editfile" value="" readonly="" data-picktop="/etc/dwpython" data-pickcloseonfile="true" data-pickfilter="" data-pickroot="/etc/dwpython" data-pickfolders="false" required="required" >
 
 <textarea id="editdata" name="editdata" placeholder="Select a file to edit by clicking into the textbox..."></textarea>
 <input type="hidden" name="commit" value="1" />
