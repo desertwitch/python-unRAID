@@ -24,7 +24,7 @@
 <FILE Run="/bin/bash">
 <INLINE>
 killall python-poller >/dev/null 2>&amp;1
-if [ ! -f /boot/config/plugins/dwpython.plg ] &amp;&amp; type python3 > /dev/null 2>&amp;1; then
+if [ ! -f /boot/config/plugins/dwpython.plg ] &amp;&amp; type python3 >/dev/null 2>&amp;1; then
     echo ""
     echo "-------------------------------------------------------------"
     echo " !!! INSTALLATION ABORTED"
@@ -34,7 +34,7 @@ if [ ! -f /boot/config/plugins/dwpython.plg ] &amp;&amp; type python3 > /dev/nul
     echo ""
     exit 1
 fi
-if [ ! -f /boot/config/plugins/dwpython.plg ] &amp;&amp; type pip3 > /dev/null 2>&amp;1; then
+if [ ! -f /boot/config/plugins/dwpython.plg ] &amp;&amp; type pip3 >/dev/null 2>&amp;1; then
     echo ""
     echo "-------------------------------------------------------------"
     echo " !!! INSTALLATION ABORTED"
