@@ -1,0 +1,95 @@
+<?xml version='1.0' standalone='yes'?>
+
+<!DOCTYPE PLUGIN [
+<!ENTITY name      "dwpython">
+<!ENTITY author    "desertwitch">
+<!ENTITY version   "2024.09.14">
+<!ENTITY gitURL    "https://raw.githubusercontent.com/&author;/python-unRAID/main">
+<!ENTITY pluginURL "&gitURL;/plugin/&name;.plg">
+<!ENTITY pkgURL    "&gitURL;/packages">
+<!ENTITY plgPATH   "/boot/config/plugins/&name;">
+<!ENTITY emhttp    "/usr/local/emhttp/plugins/&name;">
+]>
+
+<PLUGIN name="&name;" author="&author;" version="&version;" pluginURL="&pluginURL;" support="" min="6.11.0" icon="code">
+
+<CHANGES>
+## Python 3 for UNRAID
+###2024.09.17
+- release note: welcome to the first version of the package
+</CHANGES>
+
+<FILE Run="/bin/bash">
+<INLINE>
+if [ ! -f /boot/config/plugins/dwpython.plg ] &amp;&amp; type python3 > /dev/null 2>&amp;1; then
+    echo "FAILURE: python3 is already installed on your system (perhaps with another plugin)."
+    exit 1
+fi
+exit 0
+</INLINE>
+</FILE>
+
+<FILE Name="&plgPATH;/python3-3.9.10-x86_64-1.txz" Min="6.11.0" Max="6.12.99" Run="upgradepkg --install-new">
+<URL>&pkgURL;/python3-3.9.10-x86_64-1.txz</URL>
+<MD5>b30dc30d9240efaf178c61bad8211364</MD5>
+</FILE>
+
+<FILE Name="&plgPATH;/python-pip-21.3.1-x86_64-2.txz" Min="6.11.0" Max="6.12.99" Run="upgradepkg --install-new">
+<URL>&pkgURL;/python-pip-21.3.1-x86_64-2.txz</URL>
+<MD5>946d93afa6785ba0120a4ec643776627</MD5>
+</FILE>
+
+<FILE Name="&plgPATH;/python-setuptools-57.5.0-x86_64-2.txz" Min="6.11.0" Max="6.12.99" Run="upgradepkg --install-new">
+<URL>&pkgURL;/python-setuptools-57.5.0-x86_64-2.txz</URL>
+<MD5>0ef7f59f7d348ce1616ac4ed2ed04cb2</MD5>
+</FILE>
+
+<FILE Name="&plgPATH;/python3-3.11.10-x86_64-1.txz" Min="6.13.0" Run="upgradepkg --install-new">
+<URL>&pkgURL;/python3-3.11.10-x86_64-1.txz</URL>
+<MD5>a3c5f7144feeeb7aaf3727af3104d203</MD5>
+</FILE>
+
+<FILE Name="&plgPATH;/python-pip-24.2-x86_64-1.txz" Min="6.13.0" Run="upgradepkg --install-new">
+<URL>&pkgURL;/python-pip-24.2-x86_64-1.txz</URL>
+<MD5>cb25ed43e2ba23bfa74c039f0b719753</MD5>
+</FILE>
+
+<FILE Name="&plgPATH;/python-setuptools-75.1.0-x86_64-1.txz" Min="6.13.0" Run="upgradepkg --install-new">
+<URL>&pkgURL;/python-setuptools-75.1.0-x86_64-1.txz</URL>
+<MD5>c78878faa4210fca2e983da272d71049</MD5>
+</FILE>
+
+<FILE Name="&emhttp;/README.md" Mode="0644">
+<INLINE>
+**Python 3 for UNRAID**
+
+Installs Python 3, pip and setuptools onto Unraid systems (use at your own risk).
+</INLINE>
+</FILE>
+
+<FILE Run="/bin/bash">
+<INLINE>
+echo ""
+echo "-------------------------------------------------------------"
+echo " Python 3 for UNRAID has been installed."
+echo " Version: &version; / Plugin Maintainer: &author;"
+echo "-------------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+removepkg &plgPATH;/*.txz
+rm -rf &plgPATH;
+rm -rf &emhttp;
+echo ""
+echo "-----------------------------------------------------------"
+echo " Python 3 for UNRAID has been removed."
+echo " Version: &version; / Plugin Maintainer: &author;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+</PLUGIN>
