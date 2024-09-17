@@ -43,7 +43,7 @@ Markdown="false"
 </span><br>
 
 <img id="editfolder" style="cursor:pointer;margin-left: 10px;" src="/webGui/images/explore.png" >
-<input id="editfile" type="text" name="editfile" value="" readonly="" data-picktop="/etc/dwpython" data-pickcloseonfile="true" data-pickfilter="py,sh" data-pickroot="/etc/dwpython" data-pickfolders="false" required="required" >
+<input id="editfile" type="text" name="editfile" value="" readonly="" data-picktop="/etc/dwpython" data-pickcloseonfile="true" data-pickfilter="" data-pickroot="/etc/dwpython" data-pickfolders="true" required="required" >
 
 <textarea id="editdata" name="editdata" placeholder="Select a file to edit by clicking into the textbox..."></textarea>
 <input type="hidden" name="commit" value="1" />
@@ -101,7 +101,7 @@ $(function() {
     $('#btnCreate').click(function() {
         swal({
                 title: "New Script File",
-                text: "Please choose a name for your script (.py will be appended):",
+                text: "Please choose a name for your script (.py will be appended):<br>It will be placed in the root folder: /etc/dwpython/",
                 type: "input",
                 showCancelButton: true,
                 confirmButtonText: "Create Script",
@@ -145,7 +145,7 @@ $(function() {
     });
 
     $('#btnDelete').click(function() {
-        if(!$('#editfile').val().includes(".sh")) {
+        if($('#editfile').val().endsWith(".py")) {
             swal({
                     title: "Are you sure?",
                     text: "This action will <u>delete</u> the script:<br><br><span style='font-weight:bold'>" + $('#editfile').val() + "</span>",
