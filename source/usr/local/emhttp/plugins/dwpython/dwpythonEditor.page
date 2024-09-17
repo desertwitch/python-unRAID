@@ -1,0 +1,199 @@
+Menu="dwpythonSettings:1"
+Title="Python3 Script Editor"
+Tag="code"
+Markdown="false"
+---
+<?
+/* Copyright Derek Macias (parts of code from NUT package)
+ * Copyright macester (parts of code from NUT package)
+ * Copyright gfjardim (parts of code from NUT package)
+ * Copyright SimonF (parts of code from NUT package)
+ * Copyright Dan Landon (parts of code from Web GUI)
+ * Copyright Bergware International (parts of code from Web GUI)
+ * Copyright Lime Technology (any and all other parts of Unraid)
+ *
+ * Copyright desertwitch (as author and maintainer of this file)
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License 2
+ * as published by the Free Software Foundation.
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ */
+?>
+<link type="text/css" rel="stylesheet" href="<?=autov('/webGui/styles/jquery.filetree.css');?>">
+<link type="text/css" rel="stylesheet" href="<?=autov('/plugins/dwpython/css/codemirror.min.css');?>">
+<link type="text/css" rel="stylesheet" href="<?=autov('/plugins/dwpython/css/dracula.min.css');?>">
+<style type="text/css">
+    .CodeMirror { border: 1px solid #eee; cursor: text; margin-top: 15px; margin-bottom: 10px; }
+    .CodeMirror pre.CodeMirror-placeholder { color: #999; }
+    .errortext {color: #EF3D47;display: none;}
+    .fileTree {color:#486dba;width:305px;max-height:150px;overflow:scroll;position:absolute;z-index:100;display:none;}
+    #editfile { width:600px; }
+</style>
+
+<form id="editform" method="POST">
+
+<span style="float:right">
+<input type="button" value="Create File" id="btnCreate" />
+<input type="button" value="Delete File" id="btnDelete" />
+</span><br>
+
+<img id="editfolder" style="cursor:pointer;margin-left: 10px;" src="/webGui/images/explore.png" >
+<input id="editfile" type="text" name="editfile" value="" readonly="" data-picktop="/etc/dwpython" data-pickcloseonfile="true" data-pickfilter="sh,py" data-pickroot="/etc/dwpython" data-pickfolders="false" required="required" >
+
+<textarea id="editdata" name="editdata" placeholder="Select File"></textarea>
+<input type="hidden" name="commit" value="1" />
+
+<span style="margin-left:20px;">
+<input type="button" value="Save" id="btnSubmit" title="Save File" />
+<input type="button" value="Cancel" id="btnCancel" />
+</span>
+
+</form>
+
+<script src="<?=autov('/webGui/javascript/jquery.filetree.js');?>"></script>
+<script src="<?=autov('/plugins/dwpython/js/codemirror.min.js');?>"></script>
+<script src="<?=autov('/plugins/dwpython/js/autorefresh.min.js');?>"></script>
+<script src="<?=autov('/plugins/dwpython/js/placeholder.min.js');?>"></script>
+<script src="<?=autov('/plugins/dwpython/js/python.min.js');?>"></script>
+
+<script type="text/javascript">
+$(function() {
+    $('#btnCancel').click(function() {
+        location = '/Settings/dwpythonSettings';
+    });
+
+    var editor = CodeMirror.fromTextArea($('#editdata')[0], {
+        theme: '<?=($display["theme"] == '
+        white ' || $display["theme"] == '
+        azure ') ? "default" : "dracula";?>',
+        mode: 'python',
+        lineNumbers: true,
+        autoRefresh: true
+    });
+
+    editor.setSize(null, 500);
+
+    $('#editfile').fileTreeAttach(null, null, function(file) {
+        $('#editfile').val(file);
+    });
+
+    $('#editfile').on('change', function() {
+        var Editfile = $('#editfile').val();
+        $.getJSON('/plugins/dwpython/include/dwpython_edit.php', {
+            editfile: Editfile
+        }, function(data) {
+            editor.setValue(data);
+        });
+    });
+
+    $('#btnCreate').click(function() {
+        swal({
+                title: "New Script File",
+                text: "Please choose a name for your script (.py will be appended):",
+                type: "input",
+                showCancelButton: true,
+                confirmButtonText: "Create Script",
+                html: true,
+                inputPlaceholder: "Alphanumeric - no spaces or special characters!",
+                closeOnConfirm: false
+            },
+            function(value) {
+                if(value !== false && value !== "") {
+                    var format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+                    if(format.test(value)) {
+                        swal("Operation Failure", "The chosen script name contained disallowed characters.", "error");
+                    } else {
+                        $.post('/plugins/dwpython/include/dwpython_create.php', {
+                            newfile: value
+                        }, function(data) {
+                            var Title = 'File ';
+                            if(data.success) {
+                                swal({
+                                        title: Title + 'Created',
+                                        text: data.saved,
+                                        timer: 2000,
+                                        showConfirmButton: false,
+                                        type: 'success'
+                                    },
+                                    function() {
+                                        location = '/Settings/dwpythonSettings';
+                                    });
+                            }
+                            if(data.error) {
+                                swal({
+                                    title: Title + 'Error',
+                                    text: data.error + '\n\nThere was an error creating the file.',
+                                    type: 'error'
+                                });
+                            }
+                        }, 'json');
+                    }
+                }
+            });
+    });
+
+    $('#btnDelete').click(function() {
+        swal({
+                title: "Are you sure?",
+                text: "This action will <u>delete</u> the script: " + $('#editfile').val(),
+                type: "error",
+                showCancelButton: true,
+                confirmButtonText: "Delete Script",
+                closeOnConfirm: false,
+                html: true
+            },
+            function() {
+                $.post('/plugins/dwpython/include/dwpython_delete.php', {
+                    deletefile: $('#editfile').val()
+                }, function(data) {
+                    var Title = 'File ';
+                    if(data.success) {
+                        swal({
+                                title: Title + 'Deleted',
+                                text: data.saved,
+                                timer: 2000,
+                                showConfirmButton: false,
+                                type: 'success'
+                            },
+                            function() {
+                                location = '/Settings/dwpythonSettings';
+                            });
+                    }
+                    if(data.error) {
+                        swal({
+                            title: Title + 'Error',
+                            text: data.error + '\n\nThere was an error deleting the file.',
+                            type: 'error'
+                        });
+                    }
+                }, 'json');
+            });
+    });
+
+    $('#btnSubmit').click(function() {
+        editor.save();
+        $.post('/plugins/dwpython/include/dwpython_save.php', $('#editform').serializeArray(), function(data) {
+            var Title = 'File ';
+
+            if(data.success)
+                swal({
+                    title: Title + 'Saved',
+                    text: data.saved,
+                    timer: 2000,
+                    showConfirmButton: false,
+                    type: 'success'
+                });
+            if(data.error)
+                swal({
+                    title: Title + 'Error',
+                    text: data.error + '\n\nThere was an error saving the file.',
+                    type: 'error'
+                });
+        }, 'json');
+    });
+});
+</script>
