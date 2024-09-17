@@ -75,14 +75,6 @@ exit 0
 <MD5>c78878faa4210fca2e983da272d71049</MD5>
 </FILE>
 
-<FILE Name="&emhttp;/README.md" Mode="0644">
-<INLINE>
-**Python 3 for UNRAID**
-
-Installs python3, pip and setuptools onto Unraid systems (**use at your own risk**).
-</INLINE>
-</FILE>
-
 <FILE Run="/bin/bash">
 <INLINE>
 echo ""
