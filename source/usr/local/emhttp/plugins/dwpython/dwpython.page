@@ -148,9 +148,10 @@ $(function() {
                             if(data.success && data.success.response) {
                                 swal({
                                         title: Title + 'Created',
-                                        text: 'The file was created with success:\n\n' + data.success.response,
+                                        text: 'The file was created with success:<br><br><span style="font-weight:bold;">' + data.success.response + '</span>',
                                         timer: 2000,
                                         showConfirmButton: false,
+                                        html: true,
                                         type: 'success'
                                     },
                                     function() {
@@ -160,8 +161,9 @@ $(function() {
                             if(data.error && data.error.response) {
                                 swal({
                                     title: Title + 'Error',
-                                    text: 'There was an error creating the file:\n\n' + data.error.response,
-                                    type: 'error'
+                                    text: 'There was an error creating the file:<br><br><span style="font-weight:bold;">' + data.error.response + '</span>',
+                                    type: 'error',
+                                    html: true
                                 });
                             }
                         }, 'json');
@@ -188,9 +190,10 @@ $(function() {
                     if(data.success && data.success.response) {
                         swal({
                                 title: Title + 'Deleted',
-                                text: 'The file was deleted with success:\n\n' + data.success.response,
+                                text: 'The file was deleted with success:<br><br><span style="font-weight:bold;">' + data.success.response + '</span>',
                                 timer: 2000,
                                 showConfirmButton: false,
+                                html: true,
                                 type: 'success'
                             },
                             function() {
@@ -200,7 +203,8 @@ $(function() {
                     if(data.error && data.error.response) {
                         swal({
                             title: Title + 'Error',
-                            text: 'There was an error deleting the file:\n\n' + data.error.response,
+                            text: 'There was an error deleting the file:<br><br><span style="font-weight:bold;">' + data.error.response + '</span>',
+                            html: true,
                             type: 'error'
                         });
                     }
@@ -216,15 +220,17 @@ $(function() {
             if(data.success && data.success.response)
                 swal({
                     title: Title + 'Saved',
-                    text: 'The file was saved with success:\n\n' + data.success.response,
+                    text: 'The file was saved with success:<br><br><span style="font-weight:bold;">' + data.success.response + '</span>',
                     timer: 2000,
                     showConfirmButton: false,
+                    html: true,
                     type: 'success'
                 });
             if(data.error && data.error.response)
                 swal({
                     title: Title + 'Error',
-                    text: 'There was an error saving the file:\n\n' + data.error.response,
+                    text: 'There was an error saving the file:<br><br><span style="font-weight:bold;">' + data.error.response + '</span>',
+                    html: true,
                     type: 'error'
                 });
         }, 'json');
