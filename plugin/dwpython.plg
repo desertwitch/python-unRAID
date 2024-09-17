@@ -23,6 +23,7 @@
 
 <FILE Run="/bin/bash">
 <INLINE>
+killall python-poller >/dev/null 2>&amp;1
 if [ ! -f /boot/config/plugins/dwpython.plg ] &amp;&amp; type python3 > /dev/null 2>&amp;1; then
     echo ""
     echo "-------------------------------------------------------------"
@@ -89,6 +90,7 @@ if [ -x /tmp/dwpython-autoexec.sh ]; then
     echo "Executing 'autoexec.sh' script in background (check SYSLOG)..."
     (/tmp/dwpython-autoexec.sh 2>&amp;1 | logger -t "dwpython-autoexec") >/dev/null 2>&amp;1 &amp;
 fi
+/etc/cron.daily/python-poller conntest >/dev/null 2>&amp;1 &amp;
 echo ""
 echo "-------------------------------------------------------------"
 echo " Python 3 for UNRAID has been installed."
@@ -100,6 +102,7 @@ echo ""
 
 <FILE Run="/bin/bash" Method="remove">
 <INLINE>
+killall python-poller >/dev/null 2>&amp;1
 echo ""
 echo "-------------------------------------------------------------"
 echo " !!! UNINSTALLING, THIS MAY TAKE A LONG TIME..."
@@ -111,6 +114,7 @@ removepkg --terse &plgPATH;/*.txz
 rm -rf &plgPATH;
 rm -rf &emhttp;
 rm -f /tmp/dwpython-autoexec.sh
+rm -f /etc/cron.daily/python-poller >/dev/null 2>&amp;1
 
 echo ""
 echo "-----------------------------------------------------------"

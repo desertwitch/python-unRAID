@@ -19,3 +19,8 @@ cp -nr $DOCROOT/defaults/* $BOOT/scripts/ >/dev/null 2>&1
 # copy auto-execution script to RAM and make executable for post-install
 cp -f $BOOT/scripts/autoexec.sh /tmp/dwpython-autoexec.sh
 chmod 755 /tmp/dwpython-autoexec.sh
+
+# set up plugin-specific polling tasks
+rm -f /etc/cron.daily/python-poller >/dev/null 2>&1
+ln -sf /usr/local/emhttp/plugins/dwpython/scripts/poller /etc/cron.daily/python-poller >/dev/null 2>&1
+chmod +x /etc/cron.daily/python-poller >/dev/null 2>&1

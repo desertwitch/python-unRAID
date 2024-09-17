@@ -1,0 +1,120 @@
+#!/bin/bash
+# shellcheck disable=SC1091
+# shellcheck disable=SC2001
+# shellcheck disable=SC2215
+#
+# Copyright Derek Macias (parts of code from NUT package)
+# Copyright macester (parts of code from NUT package)
+# Copyright gfjardim (parts of code from NUT package)
+# Copyright SimonF (parts of code from NUT package)
+# Copyright Lime Technology (any and all other parts of Unraid)
+#
+# Copyright desertwitch (as author and maintainer of this file)
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License 2
+# as published by the Free Software Foundation.
+#
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+#
+# This script does a secure, anonymized collection of basic plugin usage metrics.
+# The collection of such metrics can be disabled through the respective plugin settings.
+#
+
+sanitize_fval() {
+	local unclean
+	local cleaned
+	unclean=$(cat)
+	cleaned=$(echo "$unclean" | sed "s/[;\"']/ /g")
+	cleaned=$(echo "$cleaned" | sed 's/  */ /g' | sed 's/^ *//; s/ *$//')
+	echo "$cleaned"
+}
+
+source /boot/config/plugins/dwpython/dwpython.cfg >/dev/null 2>&1
+
+case "$1" in
+	"devtest")
+		[ "$METRICSAPI" == "disable" ] && echo "Metrics disabled, exiting..." && exit 0
+		set -x
+		;;
+	"conntest")
+		[ "$VERBOSEMETRICS" != "1" ] && exec &>/dev/null
+		[ "$METRICSAPI" == "disable" ] && echo "Metrics disabled, exiting..." && exit 0
+		SLEEPTIME=120
+		[[ ! $SLEEPTIME =~ ^[0-9]+$ ]] && SLEEPTIME=10
+		echo "Sleeping for ${SLEEPTIME}s..."
+		sleep $SLEEPTIME
+		;;
+	*)
+		[ "$VERBOSEMETRICS" != "1" ] && exec &>/dev/null
+		[ "$METRICSAPI" == "disable" ] && echo "Metrics disabled, exiting..." && exit 0
+		SLEEPTIME=$((RANDOM % 1800))
+		[[ ! $SLEEPTIME =~ ^[0-9]+$ ]] && SLEEPTIME=10
+		echo "Randomized sleeping for ${SLEEPTIME}s..."
+		sleep $SLEEPTIME
+		;;
+esac
+
+METRIC_ENDPOINT="https://plugin-stats.desertwitch.workers.dev"
+METRIC_AUTHTOKEN=$(curl -fsS -m 300 --retry 5 --retry-delay 300 --retry-connrefused "${METRIC_ENDPOINT}/?connect")
+
+# shellcheck disable=SC2181
+if [ $? -ne 0 ] || [ -z "$METRIC_AUTHTOKEN" ]; then
+	echo "$METRIC_AUTHTOKEN"
+	echo "Failed to retrieve authorization token from endpoint, exiting..."
+	exit 0
+fi
+
+source /var/local/emhttp/var.ini >/dev/null 2>&1
+
+(( counter = 300 ))
+while [ -z "${flashGUID}" ] && [ $counter -ne 0 ]; do
+	sleep 1
+	source /var/local/emhttp/var.ini >/dev/null 2>&1
+	(( counter-- ))
+done
+[ -z "${flashGUID}" ] && echo "Could not establish client ID within 5 minutes, exiting..." && exit 0
+
+CLIENTID_ANONYMIZED=$(echo -n "${flashGUID}" | md5sum | awk '{print $1}')
+
+# shellcheck disable=SC2154
+CLIENTID_UNRAID_VERSION="$version"
+
+CLIENTID_PLUGIN="python"
+CLIENTID_PLUGIN_VERSION=$(find /var/log/packages/ -type f -iname 'dwpython-*' ! -iname '*upgraded*' -printf '%f\n')
+
+source /boot/config/plugins/dwpython/dwpython.cfg >/dev/null 2>&1
+
+# ---------------------------------------------------------------------------------------
+
+PY_BACKEND=$(find /var/log/packages/ -type f -iname 'python3-*' ! -iname '*upgraded*' -printf '%f\n')
+PY_PIP_BACKEND=$(find /var/log/packages/ -type f -iname 'python-pip-*' ! -iname '*upgraded*' -printf '%f\n')
+PY_ST_BACKEND=$(find /var/log/packages/ -type f -iname 'python-setuptools-*' ! -iname '*upgraded*' -printf '%f\n')
+PY_LINECOUNT=$(wc -l < /boot/config/plugins/dwpython/scripts/autoexec.sh)
+
+postfields=()
+
+[ -n "${CLIENTID_PLUGIN}" ] && postfields+=("-F" "plugin=$( sanitize_fval <<< "${CLIENTID_PLUGIN}" )")
+[ -n "${CLIENTID_ANONYMIZED}" ] && postfields+=("-F" "clientid=$( sanitize_fval <<< "${CLIENTID_ANONYMIZED}" )")
+[ -n "${CLIENTID_UNRAID_VERSION}" ] && postfields+=("-F" "unraid_version=$( sanitize_fval <<< "${CLIENTID_UNRAID_VERSION}" )")
+[ -n "${CLIENTID_PLUGIN_VERSION}" ] && postfields+=("-F" "plugin_version=$( sanitize_fval <<< "${CLIENTID_PLUGIN_VERSION}" )")
+
+[ -n "${PY_BACKEND}" ] && postfields+=("-F" "str1=$( sanitize_fval <<< "${PY_BACKEND}" )")
+[ -n "${PY_PIP_BACKEND}" ] && postfields+=("-F" "str2=$( sanitize_fval <<< "${PY_PIP_BACKEND}" )")
+[ -n "${PY_ST_BACKEND}" ] && postfields+=("-F" "str3=$( sanitize_fval <<< "${PY_ST_BACKEND}" )")
+[ -n "${PY_LINECOUNT}" ] && postfields+=("-F" "num1=$( sanitize_fval <<< "${PY_LINECOUNT}" )")
+
+if curl \
+	-fsS -m 300 --retry 5 --retry-delay 300 --retry-connrefused \
+	--write-out "%{http_code} " -o /dev/null \
+	-H "User-Agent: plugin-metrics/1.0.0" \
+	-H "Authorization: Bearer ${METRIC_AUTHTOKEN}" \
+	"${postfields[@]}" "${METRIC_ENDPOINT}"
+then
+	echo "=> OK"
+else
+	echo "=> FAILURE"
+fi
+
+[ "$1" == "devtest" ] && set +x
