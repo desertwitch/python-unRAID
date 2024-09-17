@@ -29,17 +29,12 @@ if(isset($_POST['deletefile'])) {
                 $return["error"]["response"] = "File does not exist on local system.";
                 die(json_encode($return));
             }
-            if(!file_exists($bootfile)){
-                $return = [];
-                $return["error"]["response"] = "File does not exist on USB.";
-                die(json_encode($return));
-            }
             if(!unlink($deletefile)) {
                 $return = [];
                 $return["error"]["response"] = "Failed to delete file on local system.";
                 die(json_encode($return));
             }
-            if(!unlink($bootfile)) {
+            if(file_exists($bootfile) && !unlink($bootfile)) {
                 $return = [];
                 $return["error"]["response"] = "Failed to delete file on USB flashdrive.";
                 die(json_encode($return));
