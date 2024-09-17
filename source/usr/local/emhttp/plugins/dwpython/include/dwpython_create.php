@@ -31,12 +31,12 @@ if(isset($_POST['newfile'])) {
                     die(json_encode($return));
                 }
             }
-            if(file_put_contents($newfile, "# " + basename($newfile)) === false) {
+            if(file_put_contents($newfile, "# " . basename($newfile)) === false) {
                 $return = [];
                 $return["error"]["response"] = "Failed to create file on local system.";
                 die(json_encode($return));
             }
-            if(file_put_contents($bootfile, "# " + basename($newfile)) === false) {
+            if(file_put_contents($bootfile, "# " . basename($newfile)) === false) {
                 $return = [];
                 $return["error"]["response"] = "Failed to create file on USB flashdrive.";
                 die(json_encode($return));
