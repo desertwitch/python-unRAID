@@ -47,7 +47,7 @@ Markdown="false"
 <div>
 This plugin aims to provide a simple and functional <strong>python3</strong> installation, including <strong>pip</strong> and <strong>setuptools</strong> for any package needs.<br>
 Since Python is rather invasive on the system, all package installations themselves are only kept in RAM and it is possible to easily revert any brokenness by rebooting the system.<br>
-If, after any reboots, you do not want to manually re-install such packages you might need, you can put respective <strong>pip</strong> commands in the provided <strong>/etc/dwpython/autoexec.sh</strong> file.
+If, after any reboots, you do not want to manually re-install any such packages that you might need, you can put respective <strong>pip</strong> commands in the provided <strong>autoexec.sh</strong> file using the editor.
 </div><br>
 
 <table class="tablesorter">
