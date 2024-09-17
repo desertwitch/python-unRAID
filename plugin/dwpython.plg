@@ -107,7 +107,7 @@ echo " !!! KEEP THIS WINDOW OPEN UNTIL IT IS REPORTED COMPLETE..."
 echo "-------------------------------------------------------------"
 echo ""
 removepkg --terse &plgPATH;/*.txz
-rm -rf &plgPATH;
+rm -rf &plgPATH;/*.txz
 rm -rf &emhttp;
 echo ""
 echo "-----------------------------------------------------------"
