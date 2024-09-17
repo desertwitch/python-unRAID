@@ -21,7 +21,7 @@ $return = [];
 
 if(isset($_POST['deletefile'])) {
     try {
-            $deletefile     = $_POST['deletefile'];
+            $deletefile = $_POST['deletefile'];
             $bootpath  = '/boot/config/plugins/dwpython/scripts/';
             $bootfile  = $plgpath.basename($deletefile);
             if(!file_exists($deletefile)){

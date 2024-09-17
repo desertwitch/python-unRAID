@@ -17,34 +17,44 @@
  * included in all copies or substantial portions of the Software.
  *
  */
-$base     = '/etc/dwpython/';
-$editfile = realpath($_POST['editfile']);
+$return = [];
 
-$plgpath  = '/boot/config/plugins/dwpython/scripts/';
-$plgfile  = $plgpath.basename($editfile);
-
-if(file_exists($editfile) && array_key_exists('editdata', $_POST)) {
-    // remove carriage returns
-    $editdata = str_replace("\r", '', $_POST['editdata']);
-
-    // create directory on flash drive if missing (shouldn't happen)
-    if(! is_dir($plgpath)){
-        mkdir($plgpath);
+if(isset($_POST['editfile']) && isset($_POST['editdata'])) {
+    try {
+            $editfile  = $_POST['editfile'];
+            $editdata  = str_replace("\r", '', $_POST['editdata']);
+            $bootpath  = '/boot/config/plugins/dwpython/scripts/';
+            $bootfile  = $plgpath.basename($editfile);
+            if(!is_dir($bootpath)){
+                if(!mkdir($bootpath)) {
+                    $return = [];
+                    $return["error"]["response"] = "Failed to create folder on USB flashdrive.";
+                    die(json_encode($return));
+                }
+            }
+            if(file_put_contents($editfile, $editdata) === false) {
+                $return = [];
+                $return["error"]["response"] = "Failed to create file on local system.";
+                die(json_encode($return));
+            }
+            if(file_put_contents($bootfile, $editdata) === false) {
+                $return = [];
+                $return["error"]["response"] = "Failed to create file on USB flashdrive.";
+                die(json_encode($return));
+            }
+            $return = [];
+            $return["success"]["response"] = $editfile;
+            echo(json_encode($return));
     }
-
-    // save conf file to flash drive
-    file_put_contents($plgfile, $editdata);
-
-    // save conf file
-    $return_var = file_put_contents($editfile, $editdata);
-} else {
-    $return_var = false;
+    catch (\Throwable $t) {
+        $return = [];
+        $return["error"]["response"] = $t->getMessage();
+        echo(json_encode($return));
+    }
+    catch (\Exception $e) {
+        $return = [];
+        $return["error"]["response"] = $e->getMessage();
+        echo(json_encode($return));
+    }
 }
-
-if($return_var) {
-    $return = ['success' => true, 'saved' => $editfile];
-} else {
-    $return = ['error' => $editfile];
-}
-echo json_encode($return);
 ?>
