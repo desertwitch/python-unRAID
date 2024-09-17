@@ -21,7 +21,7 @@ $return = [];
 
 if(isset($_POST['newfile'])) {
     try {
-            $newfile  = '/etc/dwpython/'.$_POST['newfile'].'.py';
+            $newfile  = '/etc/dwpython/'.$_POST['newfile'];
             $bootpath = '/boot/config/plugins/dwpython/scripts/';
             $bootfile = $bootpath.basename($newfile);
             if(!is_dir($bootpath)){
