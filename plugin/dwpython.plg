@@ -22,7 +22,13 @@
 <FILE Run="/bin/bash">
 <INLINE>
 if [ ! -f /boot/config/plugins/dwpython.plg ] &amp;&amp; type python3 > /dev/null 2>&amp;1; then
-    echo "FAILURE: python3 is already installed on your system (perhaps with another plugin)."
+    echo ""
+    echo "-------------------------------------------------------------"
+    echo " !!! INSTALLATION ABORTED"
+    echo " !!! python3 is already installed on your system."
+    echo " !!! Perhaps remnants in '/boot/extra' or by another plugin?"
+    echo "-------------------------------------------------------------"
+    echo ""
     exit 1
 fi
 exit 0
