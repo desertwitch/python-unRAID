@@ -30,3 +30,4 @@ if [ "$( grep -ic "dwpython" /etc/rc.d/rc.local_shutdown )" -eq 0 ]; then
 fi
 
 echo "The operation has finished, you can close this window now."
+echo "Installed packages were not touched, reboot to purge those from your system."
