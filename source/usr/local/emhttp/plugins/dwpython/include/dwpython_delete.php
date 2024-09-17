@@ -17,32 +17,46 @@
  * included in all copies or substantial portions of the Software.
  *
  */
+$return = [];
 
-if(array_key_exists('deletefile', $_POST)) {
-
-	$deletefile     = $_POST['deletefile'];
-
-	$plgpath  = '/boot/config/plugins/dwpython/scripts/';
-	$plgfile  = $plgpath.basename($deletefile);
-
-    // create directory on flash drive if missing (shouldn't happen)
-    if(! is_dir($plgpath)){
-        mkdir($plgpath);
+if(isset($_POST['deletefile'])) {
+    try {
+            $deletefile     = $_POST['deletefile'];
+            $bootpath  = '/boot/config/plugins/dwpython/scripts/';
+            $bootfile  = $plgpath.basename($deletefile);
+            if(!file_exists($deletefile)){
+                $return = [];
+                $return["error"]["response"] = "File does not exist on local system.";
+                die(json_encode($return));
+            }
+            if(!file_exists($bootfile)){
+                $return = [];
+                $return["error"]["response"] = "File does not exist on USB.";
+                die(json_encode($return));
+            }
+            if(!unlink($deletefile)) {
+                $return = [];
+                $return["error"]["response"] = "Failed to delete file on local system.";
+                die(json_encode($return));
+            }
+            if(!unlink($bootfile)) {
+                $return = [];
+                $return["error"]["response"] = "Failed to delete file on USB flashdrive.";
+                die(json_encode($return));
+            }
+            $return = [];
+            $return["success"]["response"] = $deletefile;
+            echo(json_encode($return));
     }
-
-    // save conf file to flash drive
-    unlink($plgfile);
-
-    // save conf file
-    $return_var = unlink($deletefile);
-} else {
-    $return_var = false;
+    catch (\Throwable $t) {
+        $return = [];
+        $return["error"]["response"] = $t->getMessage();
+        echo(json_encode($return));
+    }
+    catch (\Exception $e) {
+        $return = [];
+        $return["error"]["response"] = $e->getMessage();
+        echo(json_encode($return));
+    }
 }
-
-if($return_var !== false) {
-    $return = ['success' => true, 'saved' => $deletefile];
-} else {
-    $return = ['error' => $deletefile];
-}
-echo json_encode($return);
 ?>

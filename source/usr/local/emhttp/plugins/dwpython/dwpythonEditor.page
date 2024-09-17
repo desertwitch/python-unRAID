@@ -44,7 +44,7 @@ Markdown="false"
 <img id="editfolder" style="cursor:pointer;margin-left: 10px;" src="/webGui/images/explore.png" >
 <input id="editfile" type="text" name="editfile" value="" readonly="" data-picktop="/etc/dwpython" data-pickcloseonfile="true" data-pickfilter="sh,py" data-pickroot="/etc/dwpython" data-pickfolders="false" required="required" >
 
-<textarea id="editdata" name="editdata" placeholder="Select File"></textarea>
+<textarea id="editdata" name="editdata" placeholder="Select a file to edit by clicking into the textbox..."></textarea>
 <input type="hidden" name="commit" value="1" />
 
 <span style="margin-left:20px;">
@@ -67,9 +67,7 @@ $(function() {
     });
 
     var editor = CodeMirror.fromTextArea($('#editdata')[0], {
-        theme: '<?=($display["theme"] == '
-        white ' || $display["theme"] == '
-        azure ') ? "default" : "dracula";?>',
+        theme: '<?=($display["theme"] == 'white' || $display["theme"] == 'azure') ? "default" : "dracula";?>',
         mode: 'python',
         lineNumbers: true,
         autoRefresh: true
@@ -111,10 +109,10 @@ $(function() {
                             newfile: value
                         }, function(data) {
                             var Title = 'File ';
-                            if(data.success) {
+                            if(data.success && data.success.response) {
                                 swal({
                                         title: Title + 'Created',
-                                        text: data.saved,
+                                        text: data.success.response,
                                         timer: 2000,
                                         showConfirmButton: false,
                                         type: 'success'
@@ -123,10 +121,10 @@ $(function() {
                                         location = '/Settings/dwpythonSettings';
                                     });
                             }
-                            if(data.error) {
+                            if(data.error && data.error.response) {
                                 swal({
                                     title: Title + 'Error',
-                                    text: data.error + '\n\nThere was an error creating the file.',
+                                    text: 'There was an error creating the file:\n\n' + data.error.response,
                                     type: 'error'
                                 });
                             }
@@ -139,7 +137,7 @@ $(function() {
     $('#btnDelete').click(function() {
         swal({
                 title: "Are you sure?",
-                text: "This action will <u>delete</u> the script: " + $('#editfile').val(),
+                text: "This action will <u>delete</u> the script:<br><b>" + $('#editfile').val() + "</b>",
                 type: "error",
                 showCancelButton: true,
                 confirmButtonText: "Delete Script",
@@ -151,10 +149,10 @@ $(function() {
                     deletefile: $('#editfile').val()
                 }, function(data) {
                     var Title = 'File ';
-                    if(data.success) {
+                    if(data.success && data.success.response) {
                         swal({
                                 title: Title + 'Deleted',
-                                text: data.saved,
+                                text: data.success.response,
                                 timer: 2000,
                                 showConfirmButton: false,
                                 type: 'success'
@@ -163,10 +161,10 @@ $(function() {
                                 location = '/Settings/dwpythonSettings';
                             });
                     }
-                    if(data.error) {
+                    if(data.error && data.error.response) {
                         swal({
                             title: Title + 'Error',
-                            text: data.error + '\n\nThere was an error deleting the file.',
+                            text: 'There was an error deleting the file:\n\n' + data.error.response,
                             type: 'error'
                         });
                     }

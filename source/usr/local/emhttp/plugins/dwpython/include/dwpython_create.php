@@ -17,32 +17,43 @@
  * included in all copies or substantial portions of the Software.
  *
  */
+$return = [];
 
-if(array_key_exists('newfile', $_POST)) {
-
-	$newfile     = '/etc/dwpython/'.$_POST['newfile'].'.py';
-
-	$plgpath  = '/boot/config/plugins/dwpython/scripts/';
-	$plgfile  = $plgpath.basename($newfile);
-
-    // create directory on flash drive if missing (shouldn't happen)
-    if(! is_dir($plgpath)){
-        mkdir($plgpath);
+if(isset($_POST['newfile'])) {
+    try {
+            $newfile     = '/etc/dwpython/'.$_POST['newfile'].'.py';
+            $bootpath  = '/boot/config/plugins/dwpython/scripts/';
+            $bootfile  = $plgpath.basename($newfile);
+            if(!is_dir($bootpath)){
+                if(!mkdir($bootpath)) {
+                    $return = [];
+                    $return["error"]["response"] = "Failed to create folder on USB flashdrive.";
+                    die(json_encode($return));
+                }
+            }
+            if(file_put_contents($newfile, "# " + basename($newfile)) === false) {
+                $return = [];
+                $return["error"]["response"] = "Failed to create file on local system.";
+                die(json_encode($return));
+            }
+            if(file_put_contents($bootfile, "# " + basename($newfile)) === false) {
+                $return = [];
+                $return["error"]["response"] = "Failed to create file on USB flashdrive.";
+                die(json_encode($return));
+            }
+            $return = [];
+            $return["success"]["response"] = $newfile;
+            echo(json_encode($return));
     }
-
-    // save conf file to flash drive
-    file_put_contents($plgfile, "");
-
-    // save conf file
-    $return_var = file_put_contents($newfile, "");
-} else {
-    $return_var = false;
+    catch (\Throwable $t) {
+        $return = [];
+        $return["error"]["response"] = $t->getMessage();
+        echo(json_encode($return));
+    }
+    catch (\Exception $e) {
+        $return = [];
+        $return["error"]["response"] = $e->getMessage();
+        echo(json_encode($return));
+    }
 }
-
-if($return_var !== false) {
-    $return = ['success' => true, 'saved' => $newfile];
-} else {
-    $return = ['error' => $newfile];
-}
-echo json_encode($return);
 ?>
