@@ -84,6 +84,10 @@ exit 0
 
 <FILE Run="/bin/bash">
 <INLINE>
+if [ -x /etc/dwpython/autoexec.sh ]; then
+    echo "Executing 'autoexec.sh' script..."
+    (/etc/dwpython/autoexec.sh | logger -t "dwpython.autoexec") &amp;>/dev/null &amp;
+fi
 echo ""
 echo "-------------------------------------------------------------"
 echo " Python 3 for UNRAID has been installed."
