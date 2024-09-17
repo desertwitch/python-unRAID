@@ -84,7 +84,12 @@ $(function() {
         $.getJSON('/plugins/dwpython/include/dwpython_edit.php', {
             editfile: Editfile
         }, function(data) {
-            editor.setValue(data);
+            if(data.success && data.success.response) {
+                editor.setValue(data.success.response);
+            }
+            if(data.error && data.error.response) {
+                editor.setValue(data.error.response);
+            }
         });
     });
 

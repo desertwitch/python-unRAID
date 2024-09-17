@@ -22,8 +22,8 @@ $return = [];
 if(isset($_POST['deletefile'])) {
     try {
             $deletefile = $_POST['deletefile'];
-            $bootpath  = '/boot/config/plugins/dwpython/scripts/';
-            $bootfile  = $plgpath.basename($deletefile);
+            $bootpath   = '/boot/config/plugins/dwpython/scripts/';
+            $bootfile   = $plgpath.basename($deletefile);
             if(!file_exists($deletefile)){
                 $return = [];
                 $return["error"]["response"] = "File does not exist on local system.";
@@ -44,19 +44,18 @@ if(isset($_POST['deletefile'])) {
                 $return["error"]["response"] = "Failed to delete file on USB flashdrive.";
                 die(json_encode($return));
             }
-            $return = [];
             $return["success"]["response"] = $deletefile;
-            echo(json_encode($return));
     }
     catch (\Throwable $t) {
         $return = [];
         $return["error"]["response"] = $t->getMessage();
-        echo(json_encode($return));
+        die(json_encode($return));
     }
     catch (\Exception $e) {
         $return = [];
         $return["error"]["response"] = $e->getMessage();
-        echo(json_encode($return));
+        die(json_encode($return));
     }
+    echo json_encode($return);
 }
 ?>

@@ -42,19 +42,18 @@ if(isset($_POST['editfile']) && isset($_POST['editdata'])) {
                 $return["error"]["response"] = "Failed to create file on USB flashdrive.";
                 die(json_encode($return));
             }
-            $return = [];
             $return["success"]["response"] = $editfile;
-            echo(json_encode($return));
     }
     catch (\Throwable $t) {
         $return = [];
         $return["error"]["response"] = $t->getMessage();
-        echo(json_encode($return));
+        die(json_encode($return));
     }
     catch (\Exception $e) {
         $return = [];
         $return["error"]["response"] = $e->getMessage();
-        echo(json_encode($return));
+        die(json_encode($return));
     }
+    echo json_encode($return);
 }
 ?>

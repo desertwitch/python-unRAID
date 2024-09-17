@@ -21,9 +21,9 @@ $return = [];
 
 if(isset($_POST['newfile'])) {
     try {
-            $newfile     = '/etc/dwpython/'.$_POST['newfile'].'.py';
-            $bootpath  = '/boot/config/plugins/dwpython/scripts/';
-            $bootfile  = $plgpath.basename($newfile);
+            $newfile  = '/etc/dwpython/'.$_POST['newfile'].'.py';
+            $bootpath = '/boot/config/plugins/dwpython/scripts/';
+            $bootfile = $plgpath.basename($newfile);
             if(!is_dir($bootpath)){
                 if(!mkdir($bootpath)) {
                     $return = [];
@@ -31,29 +31,28 @@ if(isset($_POST['newfile'])) {
                     die(json_encode($return));
                 }
             }
-            if(file_put_contents($newfile, "# " . basename($newfile)) === false) {
+            if(file_put_contents($newfile, "# " . basename($newfile) . "\n") === false) {
                 $return = [];
                 $return["error"]["response"] = "Failed to create file on local system.";
                 die(json_encode($return));
             }
-            if(file_put_contents($bootfile, "# " . basename($newfile)) === false) {
+            if(file_put_contents($bootfile, "# " . basename($newfile) . "\n") === false) {
                 $return = [];
                 $return["error"]["response"] = "Failed to create file on USB flashdrive.";
                 die(json_encode($return));
             }
-            $return = [];
             $return["success"]["response"] = $newfile;
-            echo(json_encode($return));
     }
     catch (\Throwable $t) {
         $return = [];
         $return["error"]["response"] = $t->getMessage();
-        echo(json_encode($return));
+        die(json_encode($return));
     }
     catch (\Exception $e) {
         $return = [];
         $return["error"]["response"] = $e->getMessage();
-        echo(json_encode($return));
+        die(json_encode($return));
     }
+    echo json_encode($return);
 }
 ?>

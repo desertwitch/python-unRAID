@@ -17,12 +17,30 @@
  * included in all copies or substantial portions of the Software.
  *
  */
-$base = '/etc/dwpython/';
-$file = realpath($_GET['editfile']);
-$editfile = 'Invalid File';
+$return = [];
 
-if(file_exists($file)) {
-    $editfile = file_get_contents($file);
+if(isset($_GET['editfile'])) {
+    try {
+        $file = $_GET['editfile'];
+        if(file_exists($file)) {
+            $filecontents = file_get_contents($file);
+            if($filecontents) {
+                $return["success"]["response"] = $filecontents;
+            } else {
+                $return["error"]["response"] = "Could not get file contents";
+            }
+        } else {
+            $return["error"]["response"] = "File does not exist";
+        }
+    }
+    catch (\Throwable $t) {
+        $return = [];
+        $return["error"]["response"] = $t->getMessage();
+    }
+    catch (\Exception $e) {
+        $return = [];
+        $return["error"]["response"] = $e->getMessage();
+    }
+    echo json_encode($return); 
 }
-echo json_encode($editfile);
 ?>
