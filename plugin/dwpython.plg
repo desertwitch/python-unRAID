@@ -29,32 +29,32 @@ exit 0
 </INLINE>
 </FILE>
 
-<FILE Name="&plgPATH;/python3-3.9.10-x86_64-1.txz" Min="6.11.0" Max="6.12.99" Run="upgradepkg --terse --install-new">
+<FILE Name="&plgPATH;/python3-3.9.10-x86_64-1.txz" Min="6.11.0" Max="6.12.99" Run="upgradepkg --install-new">
 <URL>&pkgURL;/python3-3.9.10-x86_64-1.txz</URL>
 <MD5>b30dc30d9240efaf178c61bad8211364</MD5>
 </FILE>
 
-<FILE Name="&plgPATH;/python-pip-21.3.1-x86_64-2.txz" Min="6.11.0" Max="6.12.99" Run="upgradepkg --terse --install-new">
+<FILE Name="&plgPATH;/python-pip-21.3.1-x86_64-2.txz" Min="6.11.0" Max="6.12.99" Run="upgradepkg --install-new">
 <URL>&pkgURL;/python-pip-21.3.1-x86_64-2.txz</URL>
 <MD5>946d93afa6785ba0120a4ec643776627</MD5>
 </FILE>
 
-<FILE Name="&plgPATH;/python-setuptools-57.5.0-x86_64-2.txz" Min="6.11.0" Max="6.12.99" Run="upgradepkg --terse --install-new">
+<FILE Name="&plgPATH;/python-setuptools-57.5.0-x86_64-2.txz" Min="6.11.0" Max="6.12.99" Run="upgradepkg --install-new">
 <URL>&pkgURL;/python-setuptools-57.5.0-x86_64-2.txz</URL>
 <MD5>0ef7f59f7d348ce1616ac4ed2ed04cb2</MD5>
 </FILE>
 
-<FILE Name="&plgPATH;/python3-3.11.10-x86_64-1.txz" Min="6.13.0" Run="upgradepkg --terse --install-new">
+<FILE Name="&plgPATH;/python3-3.11.10-x86_64-1.txz" Min="6.13.0" Run="upgradepkg --install-new">
 <URL>&pkgURL;/python3-3.11.10-x86_64-1.txz</URL>
 <MD5>a3c5f7144feeeb7aaf3727af3104d203</MD5>
 </FILE>
 
-<FILE Name="&plgPATH;/python-pip-24.2-x86_64-1.txz" Min="6.13.0" Run="upgradepkg --terse --install-new">
+<FILE Name="&plgPATH;/python-pip-24.2-x86_64-1.txz" Min="6.13.0" Run="upgradepkg --install-new">
 <URL>&pkgURL;/python-pip-24.2-x86_64-1.txz</URL>
 <MD5>cb25ed43e2ba23bfa74c039f0b719753</MD5>
 </FILE>
 
-<FILE Name="&plgPATH;/python-setuptools-75.1.0-x86_64-1.txz" Min="6.13.0" Run="upgradepkg --terse --install-new">
+<FILE Name="&plgPATH;/python-setuptools-75.1.0-x86_64-1.txz" Min="6.13.0" Run="upgradepkg --install-new">
 <URL>&pkgURL;/python-setuptools-75.1.0-x86_64-1.txz</URL>
 <MD5>c78878faa4210fca2e983da272d71049</MD5>
 </FILE>
