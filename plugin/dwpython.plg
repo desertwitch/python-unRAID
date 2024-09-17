@@ -109,10 +109,13 @@ echo " !!! UNINSTALLING, THIS MAY TAKE A LONG TIME..."
 echo " !!! KEEP THIS WINDOW OPEN UNTIL IT IS REPORTED COMPLETE..."
 echo "-------------------------------------------------------------"
 echo ""
+
 removepkg --terse &plgPATH;/*.txz
 rm -rf &plgPATH;/*.txz
 rm -rf &emhttp;
 rm -rf /etc/dwpython
+rm -f &plgPATH;/dwpython.cfg
+
 echo ""
 echo "-----------------------------------------------------------"
 echo " Python 3 for UNRAID has been removed."
