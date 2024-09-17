@@ -100,6 +100,9 @@ echo ""
 
 <FILE Run="/bin/bash" Method="remove">
 <INLINE>
+if [ -x /usr/local/emhttp/plugins/dwpython/scripts/backup ]; then
+    /usr/local/emhttp/plugins/dwpython/scripts/backup >/dev/null 2>&amp;1
+fi
 echo ""
 echo "-------------------------------------------------------------"
 echo " !!! UNINSTALLING, THIS MAY TAKE A LONG TIME..."
