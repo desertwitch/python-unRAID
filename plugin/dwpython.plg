@@ -121,6 +121,7 @@ echo "-----------------------------------------------------------"
 echo " Python 3 for UNRAID has been removed."
 echo " Version: &version; / Plugin Maintainer: &author;"
 echo "-----------------------------------------------------------"
+echo "The next reboot will entirely clean any possible leftovers from the system."
 echo ""
 </INLINE>
 </FILE>
