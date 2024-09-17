@@ -19,8 +19,18 @@
  */
 $return = [];
 
+function startsWith($string, $startString) {
+    // Use substr to extract the start of the string and compare it with the given start string
+    return substr($string, 0, strlen($startString)) === $startString;
+}
+
 if(isset($_POST['editfile']) && isset($_POST['editdata'])) {
     try {
+            if(!startsWith($_POST['editfile'], "/etc/dwpython/")) {
+                $return = [];
+                $return["error"]["response"] = "File location is not allowed.";
+                die(json_encode($return));
+            }
             $editfile  = $_POST['editfile'];
             $editdata  = str_replace("\r", '', $_POST['editdata']);
             $bootpath  = '/boot/config/plugins/dwpython/scripts/';

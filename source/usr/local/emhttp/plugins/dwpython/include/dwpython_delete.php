@@ -19,8 +19,18 @@
  */
 $return = [];
 
+function startsWith($string, $startString) {
+    // Use substr to extract the start of the string and compare it with the given start string
+    return substr($string, 0, strlen($startString)) === $startString;
+}
+
 if(isset($_POST['deletefile'])) {
     try {
+            if(!startsWith($_POST['deletefile'], "/etc/dwpython/")) {
+                $return = [];
+                $return["error"]["response"] = "File location is not allowed.";
+                die(json_encode($return));
+            }
             $deletefile = $_POST['deletefile'];
             $bootpath   = '/boot/config/plugins/dwpython/scripts/';
             $bootfile   = $bootpath.basename($deletefile);
