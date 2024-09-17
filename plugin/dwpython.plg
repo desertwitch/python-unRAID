@@ -106,7 +106,7 @@ fi
 echo ""
 echo "-------------------------------------------------------------"
 echo " !!! UNINSTALLING, THIS MAY TAKE A LONG TIME..."
-echo " !!! KEEP THIS WINDOW OPEN UNTIL IT IS REPORTED COMPLETE..."
+echo " !!! KEEP THIS WINDOW OPEN UNTIL COMPLETION IS REPORTED..."
 echo "-------------------------------------------------------------"
 echo ""
 
