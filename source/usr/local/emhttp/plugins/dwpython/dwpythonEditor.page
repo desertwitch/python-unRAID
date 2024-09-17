@@ -205,7 +205,7 @@ $(function() {
     });
 
     $('#btnBackup').click(function(){
-        openBox('/plugins/dwpython/scripts/backupnow', 'Python3 USB Backup', 200, 200, false);
+        openBox('/plugins/dwpython/scripts/backupnow', 'Python3 USB Backup', 600, 600, false);
     });
 });
 </script>
