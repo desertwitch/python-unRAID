@@ -18,7 +18,7 @@
 
 <CHANGES>
 ## Python 3 for UNRAID
-### General Update Advisory: Backend Version Changes
+###General Update Advisory: Backend Version Changes
 Beware that Python (and "pip") packages are always tied to their respective Python versions.
 Always read the changelog carefully before updating the plugin (watch out for Python version changes).
 If the Python version changes between the updates, take note of your installed packages before updating.
