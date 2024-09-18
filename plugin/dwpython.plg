@@ -108,8 +108,8 @@ echo ""
 <INLINE>
 echo ""
 echo "-------------------------------------------------------------"
-echo " !!! UNINSTALLING, THIS MAY TAKE A LONG TIME..."
-echo " !!! KEEP THIS WINDOW OPEN UNTIL COMPLETION IS REPORTED..."
+echo " !!! UNINSTALLING, THIS MAY TAKE A WHILE..."
+echo " !!! KEEP THIS WINDOW OPEN UNTIL COMPLETION IS REPORTED"
 echo "-------------------------------------------------------------"
 echo ""
 removepkg --terse &plgPATH;/*.txz
