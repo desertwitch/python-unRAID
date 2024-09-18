@@ -49,6 +49,11 @@ exit 0
 </INLINE>
 </FILE>
 
+<FILE Name="&plgPATH;/libffi-3.3-x86_64-3.txz" Min="6.11.0" Max="6.12.99" Run="upgradepkg --install-new">
+<URL>&pkgURL;/libffi-3.3-x86_64-3.txz</URL>
+<MD5>ebb7ee0428c869f3f8ae4d8f60fa0259</MD5>
+</FILE>
+
 <FILE Name="&plgPATH;/python3-3.9.10-x86_64-1.txz" Min="6.11.0" Max="6.12.99" Run="upgradepkg --install-new">
 <URL>&pkgURL;/python3-3.9.10-x86_64-1.txz</URL>
 <MD5>b30dc30d9240efaf178c61bad8211364</MD5>
