@@ -119,6 +119,10 @@ echo " !!! UNINSTALLING, THIS MAY TAKE A WHILE..."
 echo " !!! KEEP THIS WINDOW OPEN UNTIL COMPLETION IS REPORTED"
 echo "-------------------------------------------------------------"
 echo ""
+if [ "$(find /boot/config/plugins/*.plg -type f ! -iname "*dwpython.plg*" | xargs grep "libffi" -sl)" ]; then
+    echo "libffi in use by another plugin, will not be removed with Python3."
+    rm -f &plgPATH;/libffi*.txz
+fi
 removepkg --terse &plgPATH;/*.txz
 rm -rf &plgPATH;
 rm -rf &emhttp;
