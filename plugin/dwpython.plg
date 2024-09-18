@@ -24,7 +24,7 @@
 - python-pip-21.3.1 to python-pip-24.2 for OS versions 6.11 to 6.13
 - python-setuptools-57.5.0 to python-setuptools-75.1.0 for OS versions 6.11 to 6.13
 - backend version upgrade note: this update includes a Python version change, take note of installed packages
-- backend version upgrade note: meaning do not forget to "pip freeze" before and "pip install" after updating
+- backend version upgrade note: meaning do not forget to "pip freeze" before and "pip install" after the updating
 ###2024.09.18
 - release note: welcome to the first version of the package
 </CHANGES>
