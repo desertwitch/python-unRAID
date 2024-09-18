@@ -172,6 +172,8 @@ $(function() {
                     type: 'error'
                 });
             }
+
+            location = '/Settings/dwpython';
         }, 'json');
     });
 });
