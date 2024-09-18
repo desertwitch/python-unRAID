@@ -24,6 +24,7 @@
 
 <FILE Run="/bin/bash">
 <INLINE>
+killall python-poller >/dev/null 2>&amp;1
 if [ ! -e /boot/config/plugins/dwpython.plg ] &amp;&amp; type python3 >/dev/null 2>&amp;1; then
     echo ""
     echo "-------------------------------------------------------------"
@@ -106,6 +107,7 @@ echo ""
 
 <FILE Run="/bin/bash" Method="remove">
 <INLINE>
+killall python-poller >/dev/null 2>&amp;1
 echo ""
 echo "-------------------------------------------------------------"
 echo " !!! UNINSTALLING, THIS MAY TAKE A WHILE..."
