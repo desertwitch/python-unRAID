@@ -14,7 +14,7 @@
 <!ENTITY emhttp    "/usr/local/emhttp/plugins/&name;">
 ]>
 
-<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" support="" min="6.11.0" icon="code">
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" support="https://forums.unraid.net/topic/175402-plugin-python-3-for-unraid/" min="6.11.0" icon="code">
 
 <CHANGES>
 ## Python 3 for UNRAID
