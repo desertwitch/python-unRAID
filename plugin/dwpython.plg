@@ -49,9 +49,9 @@ exit 0
 </INLINE>
 </FILE>
 
-<FILE Name="&plgPATH;/python3-3.9.10-x86_64-1.txz" Min="6.11.0" Max="6.12.99" Run="upgradepkg --install-new">
-<URL>&pkgURL;/python3-3.9.10-x86_64-1.txz</URL>
-<MD5>b30dc30d9240efaf178c61bad8211364</MD5>
+<FILE Name="&plgPATH;/python3-3.9.10-x86_64-1dw.txz" Min="6.11.0" Max="6.12.99" Run="upgradepkg --install-new">
+<URL>&pkgURL;/python3-3.9.10-x86_64-1dw.txz</URL>
+<MD5>ee0ef4e20a89821563bcfe8a125e4e51</MD5>
 </FILE>
 
 <FILE Name="&plgPATH;/python-pip-21.3.1-x86_64-2.txz" Min="6.11.0" Max="6.12.99" Run="upgradepkg --install-new">
