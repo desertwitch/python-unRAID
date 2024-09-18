@@ -27,7 +27,7 @@ If the Python version changes between the updates, take note of your installed p
 
 You will need to re-install any packages whenever on a new Python version, this is in the nature of Python.
 
-A convenient way is to use the "pip freeze" (before) and "pip install -r" (after) to save and restore any packages.
+A convenient way is to use the "pip freeze" (before) and "pip install -r" (after) to save and restore packages.
 ### 2024.09.18a
 - new: added update checking mechanism to GUI
 - python3-3.9.10 to python3-3.11.10 for OS versions 6.11 to 6.13
