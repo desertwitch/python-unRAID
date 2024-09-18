@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-# Put here all commands to run anytime the plugin installed (e.g. at boot-time), re-installed or updated on your system.
-# They are executed NON-BLOCKING (but sequentially), ensuring boot/(re-)install proceed regardless of any script errors.
+# Put here all commands that you wish to to execute after a system reboot.
+# They are executed NON-BLOCKING (but sequentially), ensuring the boot sequence proceeds regardless of any script error.
 #
 # The purpose of this script, for example, is to establish that certain global packages are always installed with `pip`.
 # Please keep in mind that using virtual environments is always preferable over globally installing any Python packages.

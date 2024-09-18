@@ -24,7 +24,6 @@
 
 <FILE Run="/bin/bash">
 <INLINE>
-killall python-poller >/dev/null 2>&amp;1
 if [ ! -e /boot/config/plugins/dwpython.plg ] &amp;&amp; type python3 >/dev/null 2>&amp;1; then
     echo ""
     echo "-------------------------------------------------------------"
@@ -86,10 +85,14 @@ exit 0
 
 <FILE Run="/bin/bash">
 <INLINE>
-if [ -x /tmp/dwpython-autoexec.sh ]; then
-    echo ""
-    echo "Executing 'autoexec.sh' script in background (check SYSLOG)..."
-    (/tmp/dwpython-autoexec.sh 2>&amp;1 | logger -t "dwpython-autoexec") >/dev/null 2>&amp;1 &amp;
+if [ ! -e /tmp/dwpython-autoexec.sh ]; then
+    cp -f /boot/config/plugins/dwpython/scripts/autoexec.sh /tmp/dwpython-autoexec.sh >/dev/null 2>&amp;1
+    chmod 755 /tmp/dwpython-autoexec.sh >/dev/null 2>&amp;1
+    if [ -x /tmp/dwpython-autoexec.sh ]; then
+        echo ""
+        echo "Executing 'autoexec.sh' script in background (check SYSLOG)..."
+        (/tmp/dwpython-autoexec.sh 2>&amp;1 | logger -t "dwpython-autoexec") >/dev/null 2>&amp;1 &amp;
+    fi
 fi
 /etc/cron.daily/python-poller conntest >/dev/null 2>&amp;1 &amp;
 echo ""
@@ -103,20 +106,17 @@ echo ""
 
 <FILE Run="/bin/bash" Method="remove">
 <INLINE>
-killall python-poller >/dev/null 2>&amp;1
 echo ""
 echo "-------------------------------------------------------------"
 echo " !!! UNINSTALLING, THIS MAY TAKE A LONG TIME..."
 echo " !!! KEEP THIS WINDOW OPEN UNTIL COMPLETION IS REPORTED..."
 echo "-------------------------------------------------------------"
 echo ""
-
 removepkg --terse &plgPATH;/*.txz
 rm -rf &plgPATH;
 rm -rf &emhttp;
 rm -f /tmp/dwpython-autoexec.sh
 rm -f /etc/cron.daily/python-poller >/dev/null 2>&amp;1
-
 echo ""
 echo "-----------------------------------------------------------"
 echo " Python 3 for UNRAID has been removed."
