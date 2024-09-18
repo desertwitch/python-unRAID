@@ -176,5 +176,9 @@ $(function() {
             }
         }, 'json');
     });
+
+    if ( typeof caPluginUpdateCheck === "function" ) {
+        caPluginUpdateCheck("dwpython.plg",{name:"Python3"});
+    }
 });
 </script>

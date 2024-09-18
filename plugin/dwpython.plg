@@ -3,14 +3,14 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "dwpython">
 <!ENTITY author    "desertwitch">
-<!ENTITY version   "2024.09.18">
+<!ENTITY version   "2024.09.18a">
 <!ENTITY launch    "Settings/dwpython">
 <!ENTITY gitURL    "https://raw.githubusercontent.com/&author;/python-unRAID/main">
 <!ENTITY pluginURL "&gitURL;/plugin/&name;.plg">
 <!ENTITY pkgURL    "&gitURL;/packages">
 <!ENTITY plgPATH   "/boot/config/plugins/&name;">
-<!ENTITY plgNAME   "dwpython-2024.09.18-x86_64-1">
-<!ENTITY plgMD5    "2cd0f7810ff3f692ef9148055707c00a">
+<!ENTITY plgNAME   "dwpython-2024.09.18-x86_64-2">
+<!ENTITY plgMD5    "8bc0ced65c1bff00f4c5978c049e42b1">
 <!ENTITY emhttp    "/usr/local/emhttp/plugins/&name;">
 ]>
 
@@ -18,6 +18,13 @@
 
 <CHANGES>
 ## Python 3 for UNRAID
+###2024.09.18a
+- new: added update checking mechanism to GUI
+- python3-3.9.10 to python3-3.11.10 for OS versions 6.11 to 6.13
+- python-pip-21.3.1 to python-pip-24.2 for OS versions 6.11 to 6.13
+- python-setuptools-57.5.0 to python-setuptools-75.1.0 for OS versions 6.11 to 6.13
+- backend version upgrade note: this update includes a Python version change, take note of installed packages
+- backend version upgrade note: meaning do not forget to "pip freeze" before and "pip install" after updating
 ###2024.09.18
 - release note: welcome to the first version of the package
 </CHANGES>
@@ -45,41 +52,48 @@ if [ ! -e /boot/config/plugins/dwpython.plg ] &amp;&amp; type pip3 >/dev/null 2>
     echo ""
     exit 1
 fi
+echo ""
+echo "-------------------------------------------------------------"
+echo " !!! INSTALLING, THIS MAY TAKE A WHILE..."
+echo " !!! IT IS NORMAL THAT SOME PACKAGES ARE SKIPPED"
+echo " !!! KEEP THIS WINDOW OPEN UNTIL COMPLETION IS REPORTED"
+echo "-------------------------------------------------------------"
+echo ""
 exit 0
 </INLINE>
 </FILE>
 
-<FILE Name="&plgPATH;/python3-3.9.10-x86_64-1dw.txz" Min="6.11.0" Max="6.12.99" Run="upgradepkg --install-new">
-<URL>&pkgURL;/python3-3.9.10-x86_64-1dw.txz</URL>
-<MD5>ee0ef4e20a89821563bcfe8a125e4e51</MD5>
+<FILE Name="&plgPATH;/python3-3.11.10-x86_64-1dw_slack15.0.txz" Min="6.11.0" Max="6.12.99" Run="upgradepkg --install-new --terse">
+<URL>&pkgURL;/python3-3.11.10-x86_64-1dw_slack15.0.txz</URL>
+<MD5>9268f4776e873f5e6ece255eb2976726</MD5>
 </FILE>
 
-<FILE Name="&plgPATH;/python-pip-21.3.1-x86_64-2.txz" Min="6.11.0" Max="6.12.99" Run="upgradepkg --install-new">
-<URL>&pkgURL;/python-pip-21.3.1-x86_64-2.txz</URL>
-<MD5>946d93afa6785ba0120a4ec643776627</MD5>
+<FILE Name="&plgPATH;/python-pip-24.2-x86_64-1dw_slack15.0.txz" Min="6.11.0" Max="6.12.99" Run="upgradepkg --install-new --terse">
+<URL>&pkgURL;/python-pip-24.2-x86_64-1dw_slack15.0.txz</URL>
+<MD5>eb4f22357ac11f3472d10a62d8dbc951</MD5>
 </FILE>
 
-<FILE Name="&plgPATH;/python-setuptools-57.5.0-x86_64-2.txz" Min="6.11.0" Max="6.12.99" Run="upgradepkg --install-new">
-<URL>&pkgURL;/python-setuptools-57.5.0-x86_64-2.txz</URL>
-<MD5>0ef7f59f7d348ce1616ac4ed2ed04cb2</MD5>
+<FILE Name="&plgPATH;/python-setuptools-75.1.0-x86_64-1dw_slack15.0.txz" Min="6.11.0" Max="6.12.99" Run="upgradepkg --install-new --terse">
+<URL>&pkgURL;/python-setuptools-75.1.0-x86_64-1dw_slack15.0.txz</URL>
+<MD5>1a7827093e738d1a5f7e2530fa48686f</MD5>
 </FILE>
 
-<FILE Name="&plgPATH;/python3-3.11.10-x86_64-1.txz" Min="6.13.0" Run="upgradepkg --install-new">
+<FILE Name="&plgPATH;/python3-3.11.10-x86_64-1.txz" Min="6.13.0" Run="upgradepkg --install-new --terse">
 <URL>&pkgURL;/python3-3.11.10-x86_64-1.txz</URL>
 <MD5>a3c5f7144feeeb7aaf3727af3104d203</MD5>
 </FILE>
 
-<FILE Name="&plgPATH;/python-pip-24.2-x86_64-1.txz" Min="6.13.0" Run="upgradepkg --install-new">
+<FILE Name="&plgPATH;/python-pip-24.2-x86_64-1.txz" Min="6.13.0" Run="upgradepkg --install-new --terse">
 <URL>&pkgURL;/python-pip-24.2-x86_64-1.txz</URL>
 <MD5>cb25ed43e2ba23bfa74c039f0b719753</MD5>
 </FILE>
 
-<FILE Name="&plgPATH;/python-setuptools-75.1.0-x86_64-1.txz" Min="6.13.0" Run="upgradepkg --install-new">
+<FILE Name="&plgPATH;/python-setuptools-75.1.0-x86_64-1.txz" Min="6.13.0" Run="upgradepkg --install-new --terse">
 <URL>&pkgURL;/python-setuptools-75.1.0-x86_64-1.txz</URL>
 <MD5>c78878faa4210fca2e983da272d71049</MD5>
 </FILE>
 
-<FILE Name="&plgPATH;/&plgNAME;.txz" Min="6.11.0" Run="upgradepkg --install-new">
+<FILE Name="&plgPATH;/&plgNAME;.txz" Min="6.11.0" Run="upgradepkg --install-new --terse">
 <URL>&gitURL;/archive/&plgNAME;.txz</URL>
 <MD5>&plgMD5;</MD5>
 </FILE>
@@ -111,6 +125,7 @@ killall python-poller >/dev/null 2>&amp;1
 echo ""
 echo "-------------------------------------------------------------"
 echo " !!! UNINSTALLING, THIS MAY TAKE A WHILE..."
+echo " !!! IT IS NORMAL THAT SOME PACKAGES ARE NOT FOUND"
 echo " !!! KEEP THIS WINDOW OPEN UNTIL COMPLETION IS REPORTED"
 echo "-------------------------------------------------------------"
 echo ""
