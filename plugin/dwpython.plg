@@ -18,7 +18,7 @@
 
 <CHANGES>
 ## Python 3 for UNRAID
-###General Update Advisory: Backend Version Changes
+### General Update Advisory: Backend Version Changes
 Beware that Python (and "pip") packages are always tied to their respective Python versions.
 
 Always read the changelog carefully before updating the plugin (watch out for Python version changes).
@@ -29,14 +29,14 @@ You will need to re-install any packages whenever on a new Python version, this 
 
 A convenient way is to use the "pip freeze" (before) and "pip install -r" (after) to save and restore any packages.
 
-###2024.09.18a
+### 2024.09.18a
 - new: added update checking mechanism to GUI
 - python3-3.9.10 to python3-3.11.10 for OS versions 6.11 to 6.13
 - python-pip-21.3.1 to python-pip-24.2 for OS versions 6.11 to 6.13
 - python-setuptools-57.5.0 to python-setuptools-75.1.0 for OS versions 6.11 to 6.13
 - backend version upgrade note: this update includes a Python version change, take note of installed packages
 - backend version upgrade note: meaning do not forget to "pip freeze" before and "pip install" after the updating
-###2024.09.18
+### 2024.09.18
 - release note: welcome to the first version of the package
 </CHANGES>
 
