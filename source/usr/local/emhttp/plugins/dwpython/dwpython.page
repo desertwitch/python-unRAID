@@ -156,6 +156,8 @@ $(function() {
                     showConfirmButton: false,
                     html: true,
                     type: 'success'
+                }, function() {
+                    location = '/Settings/dwpython';
                 });
             } else if(data.error && data.error.response) {
                 swal({
@@ -172,8 +174,6 @@ $(function() {
                     type: 'error'
                 });
             }
-
-            location = '/Settings/dwpython';
         }, 'json');
     });
 });
