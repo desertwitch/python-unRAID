@@ -50,6 +50,24 @@ require_once '/usr/local/emhttp/plugins/dwpython/include/dwpython_config.php';
     </dl>
 
     <dl>
+        <dt>Python3 Backend Branch Switch:</dt>
+        <dd>
+            <select id="BACKEND" name="BACKEND" size="1">
+                <?
+                echo(mk_option($dwpython_backend, "latest", "latest (Python 3.12.x)"));
+                echo(mk_option($dwpython_backend, "default", "default (Python 3.11.x)"));
+                ?>
+            </select>
+            <em>requires reinstall/reboot</em>
+        </dd>
+    </dl>
+
+    <blockquote class="inline_help">
+    <p><strong>default</strong> is for full compatibility, stability and requiring little user interaction (has slower version turnover), aimed at regular users.</p>
+    <p><strong>latest</strong> is for more bleeding-edge and featureful recent versions (has faster version turnover), aimed at power users and advanced tinkerers.</p>
+    </blockquote>
+
+    <dl>
         <dt>Plugin Usage Metric Functions:</dt>
         <dd>
             <select name="METRICSAPI" size="1">

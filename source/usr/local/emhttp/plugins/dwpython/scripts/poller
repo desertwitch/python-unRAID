@@ -103,6 +103,7 @@ postfields=()
 [ -n "${PY_BACKEND}" ] && postfields+=("-F" "str1=$( sanitize_fval <<< "${PY_BACKEND}" )")
 [ -n "${PY_PIP_BACKEND}" ] && postfields+=("-F" "str2=$( sanitize_fval <<< "${PY_PIP_BACKEND}" )")
 [ -n "${PY_ST_BACKEND}" ] && postfields+=("-F" "str3=$( sanitize_fval <<< "${PY_ST_BACKEND}" )")
+[ -n "${BACKEND}" ] && postfields+=("-F" "str4=$( sanitize_fval <<< "${BACKEND}" )")
 [ -n "${PY_LINECOUNT}" ] && postfields+=("-F" "num1=$( sanitize_fval <<< "${PY_LINECOUNT}" )")
 
 if curl \

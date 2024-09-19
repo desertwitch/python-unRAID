@@ -18,6 +18,7 @@
  *
  */
 $dwpython_cfg = parse_ini_file("/boot/config/plugins/dwpython/dwpython.cfg");
+$dwpython_backend = trim(isset($dwpython_cfg['BACKEND']) ? htmlspecialchars($dwpython_cfg['BACKEND']) : 'default');
 $dwpython_metricsapi = trim(isset($dwpython_cfg['METRICSAPI']) ? htmlspecialchars($dwpython_cfg['METRICSAPI']) : 'enable');
 
 $dwpython_py_backend = htmlspecialchars(trim(shell_exec("find /var/log/packages/ -type f -iname 'python3-*' -printf '%f\n' 2>/dev/null") ?? "n/a"));
