@@ -111,7 +111,7 @@ exit 0
 </FILE>
 
 <!-- slack15.1 backend switch -->
-<FILE Min="6.13" Run="/bin/bash">
+<FILE Min="6.13.0" Run="/bin/bash">
 <INLINE>
 CONFIG=&plgPATH;/&name;.cfg
 if [ -e "$CONFIG" ]; then
@@ -175,7 +175,7 @@ echo ""
 </FILE>
 
 <!-- slack15.0 backend switch -->
-<FILE Min="6.10" Max="6.12.99" Run="/bin/bash">
+<FILE Min="6.11.0" Max="6.12.99" Run="/bin/bash">
 <INLINE>
 CONFIG=&plgPATH;/&name;.cfg
 if [ -e "$CONFIG" ]; then
