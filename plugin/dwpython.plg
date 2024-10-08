@@ -3,14 +3,14 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "dwpython">
 <!ENTITY author    "desertwitch">
-<!ENTITY version   "2024.09.19">
+<!ENTITY version   "2024.10.08">
 <!ENTITY launch    "Settings/dwpython">
 <!ENTITY gitURL    "https://raw.githubusercontent.com/&author;/python-unRAID/main">
 <!ENTITY pluginURL "&gitURL;/plugin/&name;.plg">
 <!ENTITY pkgURL    "&gitURL;/packages">
 <!ENTITY plgPATH   "/boot/config/plugins/&name;">
-<!ENTITY plgNAME   "dwpython-2024.09.19-x86_64-1">
-<!ENTITY plgMD5    "5a806ef452bbd6b1f082bc1dbb115ee2">
+<!ENTITY plgNAME   "dwpython-2024.10.08-x86_64-1">
+<!ENTITY plgMD5    "39285ff91ab04e02efcc2053bc1c2620">
 <!ENTITY emhttp    "/usr/local/emhttp/plugins/&name;">
 ]>
 
@@ -27,7 +27,16 @@ If the Python version changes between the updates, take note of your installed p
 
 You will need to re-install any packages whenever on a new Python version, this is in the nature of Python.
 
-A convenient way is to use the "pip freeze" (before) and "pip install -r" (after) to save and restore packages.
+A convenient way is using "pip freeze" (before) and "pip install" (after) commands to save/restore packages.
+### 2024.10.08
+- release note: this update has no backend/version changes for users on the "default" branch (configurable in GUI settings)
+- new: Python 3.13.x was released as stable and is now available for users on the "latest" branch (configurable in GUI settings)
+- new: a "previous" backend branch was added for users wishing to remain on Python 3.12.x (configurable in GUI settings)
+- latest backend: updated to python3-3.13.0 (for OS versions 6.11 to 7.0)
+- latest backend: this update includes a Python version change, take note of installed packages (see above)
+- previous backend: updated to python3-3.12.7 (for OS versions 6.11 to 7.0)
+- previous backend: patch version update is package compatible (when switching branch latest/3.12.6 to previous/3.12.7)
+- "latest" users wishing to stay on 3.12.x: update plugin, switch branch to "previous", reinstall plugin (packages are preserved)
 ### 2024.09.19
 - new: added a backend branch switch to the GUI offering to choose from different Python versions
 - new: added a "latest" backend to the GUI for faster-paced, bleeding-edge Python versions (for advanced users)
@@ -79,9 +88,25 @@ exit 0
 </FILE>
 
 <!-- slack15.1 latest -->
-<FILE Name="&plgPATH;/python3-3.12.6-x86_64-1dwl_slack15.1.txz" Min="6.13.0">
-<URL>&pkgURL;/python3-3.12.6-x86_64-1dwl_slack15.1.txz</URL>
-<MD5>7cc683e8e32fb0155ffb702d4eb171cf</MD5>
+<FILE Name="&plgPATH;/python3-3.13.0-x86_64-1dwl_slack15.1.txz" Min="6.13.0">
+<URL>&pkgURL;/python3-3.13.0-x86_64-1dwl_slack15.1.txz</URL>
+<MD5>d9c3852be7004a61888b037a4a79327a</MD5>
+</FILE>
+
+<FILE Name="&plgPATH;/python-pip-24.2-x86_64-2dwl_slack15.1.txz" Min="6.13.0">
+<URL>&pkgURL;/python-pip-24.2-x86_64-2dwl_slack15.1.txz</URL>
+<MD5>5714abfc6fe9e5fe4715742614bfd012</MD5>
+</FILE>
+
+<FILE Name="&plgPATH;/python-setuptools-75.1.0-x86_64-2dwl_slack15.1.txz" Min="6.13.0">
+<URL>&pkgURL;/python-setuptools-75.1.0-x86_64-2dwl_slack15.1.txz</URL>
+<MD5>d151b777d570e97fa1053980c4790565</MD5>
+</FILE>
+
+<!-- slack15.1 previous -->
+<FILE Name="&plgPATH;/python3-3.12.7-x86_64-1dwl_slack15.1.txz" Min="6.13.0">
+<URL>&pkgURL;/python3-3.12.7-x86_64-1dwl_slack15.1.txz</URL>
+<MD5>76099117d5327103f23cbfc5e9d1fba1</MD5>
 </FILE>
 
 <FILE Name="&plgPATH;/python-pip-24.2-x86_64-1dwl_slack15.1.txz" Min="6.13.0">
@@ -118,7 +143,12 @@ if [ -e "$CONFIG" ]; then
     source "$CONFIG"
     if [ "$BACKEND" == "latest" ]; then
         echo "Installing user-configured LATEST backend for Python3..."
-        upgradepkg --install-new --terse &plgPATH;/python3-3.12.6-x86_64-1dwl_slack15.1.txz
+        upgradepkg --install-new --terse &plgPATH;/python3-3.13.0-x86_64-1dwl_slack15.1.txz
+        upgradepkg --install-new --terse &plgPATH;/python-pip-24.2-x86_64-2dwl_slack15.1.txz
+        upgradepkg --install-new --terse &plgPATH;/python-setuptools-75.1.0-x86_64-2dwl_slack15.1.txz
+    elif [ "$BACKEND" == "previous" ]; then
+        echo "Installing user-configured PREVIOUS backend for Python3..."
+        upgradepkg --install-new --terse &plgPATH;/python3-3.12.7-x86_64-1dwl_slack15.1.txz
         upgradepkg --install-new --terse &plgPATH;/python-pip-24.2-x86_64-1dwl_slack15.1.txz
         upgradepkg --install-new --terse &plgPATH;/python-setuptools-75.1.0-x86_64-1dwl_slack15.1.txz
     elif [ "$BACKEND" == "default" ]; then
@@ -143,9 +173,25 @@ echo ""
 </FILE>
 
 <!-- slack15.0 latest -->
-<FILE Name="&plgPATH;/python3-3.12.6-x86_64-1dwl_slack15.0.txz" Min="6.11.0" Max="6.12.99">
-<URL>&pkgURL;/python3-3.12.6-x86_64-1dwl_slack15.0.txz</URL>
-<MD5>367738ace900d8d2ce52f48a9f46f8aa</MD5>
+<FILE Name="&plgPATH;/python3-3.13.0-x86_64-1dwl_slack15.0.txz" Min="6.11.0" Max="6.12.99">
+<URL>&pkgURL;/python3-3.13.0-x86_64-1dwl_slack15.0.txz</URL>
+<MD5>e49758df5fdeb3d7c0a1d8cf7ea1e7a1</MD5>
+</FILE>
+
+<FILE Name="&plgPATH;/python-pip-24.2-x86_64-2dwl_slack15.0.txz" Min="6.11.0" Max="6.12.99">
+<URL>&pkgURL;/python-pip-24.2-x86_64-2dwl_slack15.0.txz</URL>
+<MD5>af7d9a110d7e5f8f68d2c467a9a7a621</MD5>
+</FILE>
+
+<FILE Name="&plgPATH;/python-setuptools-75.1.0-x86_64-2dwl_slack15.0.txz" Min="6.11.0" Max="6.12.99">
+<URL>&pkgURL;/python-setuptools-75.1.0-x86_64-2dwl_slack15.0.txz</URL>
+<MD5>e933b2b7954877e107ddf98a0c31185a</MD5>
+</FILE>
+
+<!-- slack15.0 previous -->
+<FILE Name="&plgPATH;/python3-3.12.7-x86_64-1dwl_slack15.0.txz" Min="6.11.0" Max="6.12.99">
+<URL>&pkgURL;/python3-3.12.7-x86_64-1dwl_slack15.0.txz</URL>
+<MD5>727afc626f144a264ceb798c776c338c</MD5>
 </FILE>
 
 <FILE Name="&plgPATH;/python-pip-24.2-x86_64-1dwl_slack15.0.txz" Min="6.11.0" Max="6.12.99">
@@ -182,7 +228,12 @@ if [ -e "$CONFIG" ]; then
     source "$CONFIG"
     if [ "$BACKEND" == "latest" ]; then
         echo "Installing user-configured LATEST backend for Python3..."
-        upgradepkg --install-new --terse &plgPATH;/python3-3.12.6-x86_64-1dwl_slack15.0.txz
+        upgradepkg --install-new --terse &plgPATH;/python3-3.13.0-x86_64-1dwl_slack15.0.txz
+        upgradepkg --install-new --terse &plgPATH;/python-pip-24.2-x86_64-2dwl_slack15.0.txz
+        upgradepkg --install-new --terse &plgPATH;/python-setuptools-75.1.0-x86_64-2dwl_slack15.0.txz
+    elif [ "$BACKEND" == "previous" ]; then
+        echo "Installing user-configured PREVIOUS backend for Python3..."
+        upgradepkg --install-new --terse &plgPATH;/python3-3.12.7-x86_64-1dwl_slack15.0.txz
         upgradepkg --install-new --terse &plgPATH;/python-pip-24.2-x86_64-1dwl_slack15.0.txz
         upgradepkg --install-new --terse &plgPATH;/python-setuptools-75.1.0-x86_64-1dwl_slack15.0.txz
     elif [ "$BACKEND" == "default" ]; then
