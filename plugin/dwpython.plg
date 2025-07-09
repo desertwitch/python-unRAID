@@ -5,7 +5,7 @@
 <!ENTITY author    "desertwitch">
 <!ENTITY version   "2025.02.26">
 <!ENTITY launch    "Settings/dwpython">
-<!ENTITY gitURL    "https://raw.githubusercontent.com/&author;/python-unRAID/main">
+<!ENTITY gitURL    "https://raw.githubusercontent.com/&author;/python-unRAID/testing">
 <!ENTITY pluginURL "&gitURL;/plugin/&name;.plg">
 <!ENTITY pkgURL    "&gitURL;/packages">
 <!ENTITY plgPATH   "/boot/config/plugins/&name;">
@@ -28,6 +28,12 @@ If the Python version changes between the updates, take note of your installed p
 A convenient way is using "pip freeze" (before) and "pip install" (after) commands to save/restore packages.
 
 Packages only need re-install updating to a new major/minor version, e.g. 3.12 to 3.13 (NOT 3.12.1 to 3.12.2).
+### 2025.07.09
+- all backends: updated python-pip-24.3.1 to python-pip-25.1.1
+- all backends: updated python-setuptools-75.8.0 to python-setuptools-80.9.0
+- default backend: updated python3-3.11.11 to python3-3.11.13 (package compatible)
+- previous backend: updated python3-3.12.8 to python3-3.12.11 (package compatible)
+- latest backend: updated python3-3.13.1 to python3-3.13.5 (package compatible)
 ### 2025.02.26
 - fix: future-proofing changes to base plugin structure
 ### 2025.01.09
