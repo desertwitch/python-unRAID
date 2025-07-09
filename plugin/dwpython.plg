@@ -181,19 +181,19 @@ echo ""
 </FILE>
 
 <!-- slack15.0 latest -->
-<FILE Name="&plgPATH;/python3-3.13.1-x86_64-1dwl_slack15.0.txz" Min="6.11.0" Max="6.12.99">
-<URL>&pkgURL;/python3-3.13.1-x86_64-1dwl_slack15.0.txz</URL>
-<MD5>4cc23e67e0f29331ce0fcb1ca717d065</MD5>
+<FILE Name="&plgPATH;/python3-3.13.5-x86_64-1dwl_slack15.0.txz" Min="6.11.0" Max="6.12.99">
+<URL>&pkgURL;/python3-3.13.5-x86_64-1dwl_slack15.0.txz</URL>
+<MD5>a9c45f504d067e38e33f1a4fa955c657</MD5>
 </FILE>
 
-<FILE Name="&plgPATH;/python-pip-24.3.1-x86_64-1dwl_slack15.0.txz" Min="6.11.0" Max="6.12.99">
-<URL>&pkgURL;/python-pip-24.3.1-x86_64-1dwl_slack15.0.txz</URL>
-<MD5>adc001ced15b3e29fc0efe9257c874b0</MD5>
+<FILE Name="&plgPATH;/python-pip-25.1.1-x86_64-1dwl_slack15.0.txz" Min="6.11.0" Max="6.12.99">
+<URL>&pkgURL;/python-pip-25.1.1-x86_64-1dwl_slack15.0.txz</URL>
+<MD5>45786b1440c06895c9e4c31b7fbafef2</MD5>
 </FILE>
 
-<FILE Name="&plgPATH;/python-setuptools-75.8.0-x86_64-1dwl_slack15.0.txz" Min="6.11.0" Max="6.12.99">
-<URL>&pkgURL;/python-setuptools-75.8.0-x86_64-1dwl_slack15.0.txz</URL>
-<MD5>e6248c193c268aad68da972cc4b1f964</MD5>
+<FILE Name="&plgPATH;/python-setuptools-80.9.0-x86_64-1dwl_slack15.0.txz" Min="6.11.0" Max="6.12.99">
+<URL>&pkgURL;/python-setuptools-80.9.0-x86_64-1dwl_slack15.0.txz</URL>
+<MD5>c005ba533cea16eb9bc627b86145b66c</MD5>
 </FILE>
 
 <!-- slack15.0 previous -->
@@ -236,9 +236,9 @@ if [ -e "$CONFIG" ]; then
     source "$CONFIG"
     if [ "$BACKEND" == "latest" ]; then
         echo "Installing user-configured LATEST backend for Python3..."
-        upgradepkg --install-new --terse &plgPATH;/python3-3.13.1-x86_64-1dwl_slack15.0.txz
-        upgradepkg --install-new --terse &plgPATH;/python-pip-24.3.1-x86_64-1dwl_slack15.0.txz
-        upgradepkg --install-new --terse &plgPATH;/python-setuptools-75.8.0-x86_64-1dwl_slack15.0.txz
+        upgradepkg --install-new --terse &plgPATH;/python3-3.13.5-x86_64-1dwl_slack15.0.txz
+        upgradepkg --install-new --terse &plgPATH;/python-pip-25.1.1-x86_64-1dwl_slack15.0.txz
+        upgradepkg --install-new --terse &plgPATH;/python-setuptools-80.9.0-x86_64-1dwl_slack15.0.txz
     elif [ "$BACKEND" == "previous" ]; then
         echo "Installing user-configured PREVIOUS backend for Python3..."
         upgradepkg --install-new --terse &plgPATH;/python3-3.12.8-x86_64-1dwp_slack15.0.txz
