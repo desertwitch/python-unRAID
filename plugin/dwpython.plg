@@ -81,7 +81,7 @@ if [ -e /boot/config/plugins/iSCSIgui.plg ] || [ -e /boot/config/plugins/iSCSIgu
     echo " This plugin cannot be installed at the same time with 'iSCSI'."
     echo ""
     echo " The reason is that 'iSCSI' installs as conflicting Python version."
-    echo " Please use that plugin's Python installation or uninstall and try again."
+    echo " Please use that plugin's Python installation or uninstall, reboot and retry."
     echo ""
     echo "--------------------------------------------------------------------------------"
     echo ""
