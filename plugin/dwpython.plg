@@ -72,6 +72,19 @@ Packages only need re-install updating to a new major/minor version, e.g. 3.12 t
 <FILE Run="/bin/bash">
 <INLINE>
 killall python-poller >/dev/null 2>&amp;1
+if [ -e /boot/config/plugins/iSCSIgui.plg ] || [ -e /boot/config/plugins/iSCSIgui-dev.plg ]; then
+    echo ""
+    echo "--------------------------------------------------------------------------------"
+    echo " INSTALLATION ABORTED"
+    echo " This plugin cannot be installed at the same time with 'iSCSI'"
+    echo ""
+    echo " The reason is that 'iSCSI' installs as conflicting Python version."
+    echo " Please use that plugin's Python installation or uninstall it and try again."
+    echo ""
+    echo "--------------------------------------------------------------------------------"
+    echo ""
+    exit 1
+fi
 if [ ! -e /boot/config/plugins/dwpython.plg ] &amp;&amp; type python3 >/dev/null 2>&amp;1; then
     echo ""
     echo "--------------------------------------------------------------------------------"
@@ -79,7 +92,7 @@ if [ ! -e /boot/config/plugins/dwpython.plg ] &amp;&amp; type python3 >/dev/null
     echo " python3 is already installed on your system."
     echo ""
     echo " A. Another plugin could have installed conflicting packages."
-    echo " One such known plugin would be 'Cache Mover', also installing Python."
+    echo " Known plugins would be 'Cache Mover' or 'iSCSI', also installing Python."
     echo ""
     echo " B. The '/boot/extra' folder could contain conflicting packages."
     echo " These could be present from previous NerdTools/NerdPack installations."
@@ -96,7 +109,7 @@ if [ ! -e /boot/config/plugins/dwpython.plg ] &amp;&amp; type pip3 >/dev/null 2>
     echo " pip3 is already installed on your system."
     echo ""
     echo " A. Another plugin could have installed conflicting packages."
-    echo " One such known plugin would be 'Cache Mover', also installing Python."
+    echo " Known plugins would be 'Cache Mover' or 'iSCSI', also installing Python."
     echo ""
     echo " B. The '/boot/extra' folder could contain conflicting packages."
     echo " These could be present from previous NerdTools/NerdPack installations."
