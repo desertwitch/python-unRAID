@@ -29,7 +29,7 @@ A convenient way is using "pip freeze" (before) and "pip install" (after) comman
 
 Packages only need re-install updating to a new major/minor version, e.g. 3.12 to 3.13 (NOT 3.12.1 to 3.12.2).
 ### 2025.09.30
-- fix: disallow install at the same time with iSCSI (also installs an older Python)
+- fix: disallow install at the same time with iSCSI (also installs Python)
 ### 2025.08.21
 - fix: make pages and dashboards compliant with new responsive UI
 ### 2025.07.09
