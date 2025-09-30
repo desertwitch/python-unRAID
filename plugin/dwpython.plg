@@ -3,7 +3,7 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "dwpython">
 <!ENTITY author    "desertwitch">
-<!ENTITY version   "2025.08.21">
+<!ENTITY version   "2025.09.30">
 <!ENTITY launch    "Settings/dwpython">
 <!ENTITY gitURL    "https://raw.githubusercontent.com/&author;/python-unRAID/main">
 <!ENTITY pluginURL "&gitURL;/plugin/&name;.plg">
@@ -28,6 +28,8 @@ If the Python version changes between the updates, take note of your installed p
 A convenient way is using "pip freeze" (before) and "pip install" (after) commands to save/restore packages.
 
 Packages only need re-install updating to a new major/minor version, e.g. 3.12 to 3.13 (NOT 3.12.1 to 3.12.2).
+### 2025.09.30
+- fix: disallow install at the same time with iSCSI (also installs an older Python)
 ### 2025.08.21
 - fix: make pages and dashboards compliant with new responsive UI
 ### 2025.07.09
