@@ -87,6 +87,23 @@ if [ -e /boot/config/plugins/iSCSIgui.plg ] || [ -e /boot/config/plugins/iSCSIgu
     echo ""
     exit 1
 fi
+if [ ! -e /boot/config/plugins/dwpython.plg ] &amp;&amp; type python >/dev/null 2>&amp;1; then
+    echo ""
+    echo "--------------------------------------------------------------------------------"
+    echo " INSTALLATION ABORTED"
+    echo " python is already installed on your system."
+    echo ""
+    echo " A. Another plugin could have installed conflicting packages."
+    echo " Known plugins would be 'Cache Mover' or 'iSCSI', also installing Python."
+    echo ""
+    echo " B. The '/boot/extra' folder could contain conflicting packages."
+    echo " These could be present from previous NerdTools/NerdPack installations."
+    echo ""
+    echo " Please manually resolve any such package conflicts and try again afterwards."
+    echo "--------------------------------------------------------------------------------"
+    echo ""
+    exit 1
+fi
 if [ ! -e /boot/config/plugins/dwpython.plg ] &amp;&amp; type python3 >/dev/null 2>&amp;1; then
     echo ""
     echo "--------------------------------------------------------------------------------"
