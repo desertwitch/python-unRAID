@@ -184,19 +184,19 @@ exit 0
 </FILE>
 
 <!-- slack15.1 default -->
-<FILE Name="&plgPATH;/python3-3.11.13-x86_64-1dw_slack15.1.txz" Min="6.13.0">
-<URL>&pkgURL;/python3-3.11.13-x86_64-1dw_slack15.1.txz</URL>
-<MD5>ce7e2a4462159cf4c25f4d798fc8d897</MD5>
+<FILE Name="&plgPATH;/python3-3.11.15-x86_64-1dw_slack15.1.txz" Min="6.13.0">
+<URL>&pkgURL;/python3-3.11.15-x86_64-1dw_slack15.1.txz</URL>
+<MD5>64a199ed6dbd725054f8a2484622d4ed</MD5>
 </FILE>
 
-<FILE Name="&plgPATH;/python-pip-25.1.1-x86_64-1dw_slack15.1.txz" Min="6.13.0">
-<URL>&pkgURL;/python-pip-25.1.1-x86_64-1dw_slack15.1.txz</URL>
-<MD5>3631a0d8bf222f735db4a699a6801f6b</MD5>
+<FILE Name="&plgPATH;/python-pip-26.1-x86_64-1dw_slack15.1.txz" Min="6.13.0">
+<URL>&pkgURL;/python-pip-26.1-x86_64-1dw_slack15.1.txz</URL>
+<MD5>c4b04c4c25b49b07b9292030bc1ad696</MD5>
 </FILE>
 
-<FILE Name="&plgPATH;/python-setuptools-80.9.0-x86_64-1dw_slack15.1.txz" Min="6.13.0">
-<URL>&pkgURL;/python-setuptools-80.9.0-x86_64-1dw_slack15.1.txz</URL>
-<MD5>b6f376cf8419528ece65239d8fedfd02</MD5>
+<FILE Name="&plgPATH;/python-setuptools-82.0.1-x86_64-1dw_slack15.1.txz" Min="6.13.0">
+<URL>&pkgURL;/python-setuptools-82.0.1-x86_64-1dw_slack15.1.txz</URL>
+<MD5>b48fdaede7b3c036ca60fdbc8d6f5506</MD5>
 </FILE>
 
 <!-- slack15.1 backend switch -->
@@ -217,20 +217,20 @@ if [ -e "$CONFIG" ]; then
         upgradepkg --install-new --terse &plgPATH;/python-setuptools-82.0.1-x86_64-1dwp_slack15.1.txz
     elif [ "$BACKEND" == "default" ]; then
         echo "Installing DEFAULT backend for Python3..."
-        upgradepkg --install-new --terse &plgPATH;/python3-3.11.13-x86_64-1dw_slack15.1.txz
-        upgradepkg --install-new --terse &plgPATH;/python-pip-25.1.1-x86_64-1dw_slack15.1.txz
-        upgradepkg --install-new --terse &plgPATH;/python-setuptools-80.9.0-x86_64-1dw_slack15.1.txz
+        upgradepkg --install-new --terse &plgPATH;/python3-3.11.15-x86_64-1dw_slack15.1.txz
+        upgradepkg --install-new --terse &plgPATH;/python-pip-26.1-x86_64-1dw_slack15.1.txz
+        upgradepkg --install-new --terse &plgPATH;/python-setuptools-82.0.1-x86_64-1dw_slack15.1.txz
     else
         echo "Installing DEFAULT backend for Python3..."
-        upgradepkg --install-new --terse &plgPATH;/python3-3.11.13-x86_64-1dw_slack15.1.txz
-        upgradepkg --install-new --terse &plgPATH;/python-pip-25.1.1-x86_64-1dw_slack15.1.txz
-        upgradepkg --install-new --terse &plgPATH;/python-setuptools-80.9.0-x86_64-1dw_slack15.1.txz
+        upgradepkg --install-new --terse &plgPATH;/python3-3.11.15-x86_64-1dw_slack15.1.txz
+        upgradepkg --install-new --terse &plgPATH;/python-pip-26.1-x86_64-1dw_slack15.1.txz
+        upgradepkg --install-new --terse &plgPATH;/python-setuptools-82.0.1-x86_64-1dw_slack15.1.txz
     fi
 else
     echo "Installing DEFAULT backend for Python3..."
-    upgradepkg --install-new --terse &plgPATH;/python3-3.11.13-x86_64-1dw_slack15.1.txz
-    upgradepkg --install-new --terse &plgPATH;/python-pip-25.1.1-x86_64-1dw_slack15.1.txz
-    upgradepkg --install-new --terse &plgPATH;/python-setuptools-80.9.0-x86_64-1dw_slack15.1.txz
+    upgradepkg --install-new --terse &plgPATH;/python3-3.11.15-x86_64-1dw_slack15.1.txz
+    upgradepkg --install-new --terse &plgPATH;/python-pip-26.1-x86_64-1dw_slack15.1.txz
+    upgradepkg --install-new --terse &plgPATH;/python-setuptools-82.0.1-x86_64-1dw_slack15.1.txz
 fi
 echo ""
 </INLINE>
