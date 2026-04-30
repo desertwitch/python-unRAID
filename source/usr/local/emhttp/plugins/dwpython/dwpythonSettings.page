@@ -29,34 +29,43 @@ require_once '/usr/local/emhttp/plugins/dwpython/include/dwpython_config.php';
 <input type="hidden" name="#file" value="dwpython/dwpython.cfg">
 
     <dl>
-        <dt>Python3 Backend:</dt>
+        <dt><i>python3</i> Package:</dt>
         <dd>
             <strong><?=$dwpython_py_backend?></strong>
         </dd>
     </dl>
 
     <dl>
-        <dt>Python3 pip Backend:</dt>
+        <dt><i>pip</i> Package:</dt>
         <dd>
             <strong><?=$dwpython_pip_backend?></strong>
         </dd>
     </dl>
 
     <dl>
-        <dt>Python3 Setuptools Backend:</dt>
+        <dt><i>setuptools</i> Package:</dt>
         <dd>
             <strong><?=$dwpython_st_backend?></strong>
         </dd>
     </dl>
 
     <dl>
-        <dt>Python3 Backend Branch Switch:</dt>
+        <dt><i>uv</i> Package:</dt>
+        <dd>
+            <strong><?=$dwpython_uv_backend?></strong>
+        </dd>
+    </dl>
+
+    <dl>
+        <dt>Branch Switch:</dt>
         <dd>
             <select id="BACKEND" name="BACKEND" size="1">
                 <?
-                echo(mk_option($dwpython_backend, "latest", "latest (Python 3.13.x)"));
-                echo(mk_option($dwpython_backend, "previous", "previous (Python 3.12.x)"));
-                echo(mk_option($dwpython_backend, "default", "default (Python 3.11.x)"));
+                echo(mk_option($dwpython_backend, "uv", "None (use uv)"));
+                echo(mk_option($dwpython_backend, "next", "Python 3.14.x"));
+                echo(mk_option($dwpython_backend, "latest", "Python 3.13.x"));
+                echo(mk_option($dwpython_backend, "previous", "Python 3.12.x"));
+                echo(mk_option($dwpython_backend, "default", "Python 3.11.x (default)"));
                 ?>
             </select>
             <em>requires reinstall or reboot</em>
@@ -64,8 +73,9 @@ require_once '/usr/local/emhttp/plugins/dwpython/include/dwpython_config.php';
     </dl>
 
     <blockquote class="inline_help">
-    <p><strong>default</strong> is for full compatibility, stability and requiring little user interaction (has slower version turnover), aimed at regular users.</p>
-    <p><strong>previous / latest</strong> are for more bleeding-edge and featureful recent versions (have faster version turnover), aimed at power users and advanced tinkerers.</p>
+    <p>Selects the version of Python3 (change requires either a plugin reinstall or ideally a reboot).</p>
+    <p>If you choose <a href="https://docs.astral.sh/uv/" target="_blank">uv</a>, none is installed, and you will use <code>uv</code> to install and manage your Python versions.</p>
+    <p>Utilize the <i>autoexec.sh</i> file (using the editor above) to automatically set up your required environment on server boot.</p>
     </blockquote>
 
     <dl>

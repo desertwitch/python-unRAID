@@ -20,7 +20,8 @@
 $dwpython_cfg = parse_ini_file("/boot/config/plugins/dwpython/dwpython.cfg");
 $dwpython_backend = trim(isset($dwpython_cfg['BACKEND']) ? htmlspecialchars($dwpython_cfg['BACKEND']) : 'default');
 
-$dwpython_py_backend = htmlspecialchars(trim(shell_exec("find /var/log/packages/ -type f -iname 'python3-*' -printf '%f\n' 2>/dev/null") ?? "n/a"));
-$dwpython_pip_backend = htmlspecialchars(trim(shell_exec("find /var/log/packages/ -type f -iname 'python-pip-*' -printf '%f\n' 2>/dev/null") ?? "n/a"));
-$dwpython_st_backend = htmlspecialchars(trim(shell_exec("find /var/log/packages/ -type f -iname 'python-setuptools-*' -printf '%f\n' 2>/dev/null") ?? "n/a"));
+$dwpython_py_backend = htmlspecialchars(trim(shell_exec("find /var/log/packages/ -type f -iname 'python3-*' -printf '%f\n' 2>/dev/null") ?? "-"));
+$dwpython_pip_backend = htmlspecialchars(trim(shell_exec("find /var/log/packages/ -type f -iname 'python-pip-*' -printf '%f\n' 2>/dev/null") ?? "-"));
+$dwpython_st_backend = htmlspecialchars(trim(shell_exec("find /var/log/packages/ -type f -iname 'python-setuptools-*' -printf '%f\n' 2>/dev/null") ?? "-"));
+$dwpython_uv_backend = htmlspecialchars(trim(shell_exec("find /var/log/packages/ -type f -iname 'uv-*' -printf '%f\n' 2>/dev/null") ?? "-"));
 ?>
