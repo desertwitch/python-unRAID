@@ -67,8 +67,8 @@ require_once '/usr/local/emhttp/plugins/dwpython/include/dwpython_config.php';
 
     <blockquote class="inline_help">
     <p>Selects the version of Python3 (change requires either a plugin reinstall or ideally a reboot).</p>
-    <p>If you choose <a href="https://docs.astral.sh/uv/" target="_blank">uv</a>, you use that to install and manage your Python versions.</p>
-    <p>Utilize the <i>autoexec.sh</i> file (using the editor below) to automatically set up your required environment whenever the server boots.</p>
+    <p>If you choose <a href="https://docs.astral.sh/uv/" target="_blank">uv</a>, none is installed, and you will use <code>uv</code> to install and manage your Python versions.</p>
+    <p>Utilize the <i>autoexec.sh</i> file (using the editor above) to automatically set up your required environment on server boot.</p>
     </blockquote>
 
     <dl>
