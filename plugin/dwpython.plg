@@ -160,7 +160,7 @@ exit 0
 </FILE>
 
 <!-- uv -->
-<FILE Name="&plgPATH;/uv-0.11.8-x86_64-1.txz" Min="6.11.0">
+<FILE Name="&plgPATH;/uv-0.11.8-x86_64-1.txz" Min="6.11.0" Run="upgradepkg --install-new --terse">
 <URL>&pkgURL;/uv-0.11.8-x86_64-1.txz</URL>
 <MD5>d6121cda85fcf9b917d2a179aba6c152</MD5>
 </FILE>
@@ -236,8 +236,8 @@ CONFIG=&plgPATH;/&name;.cfg
 if [ -e "$CONFIG" ]; then
     source "$CONFIG"
     if [ "$BACKEND" == "uv" ]; then
+        # We already installed it above, just inform the user what backend was chosen.
         echo "Installing user-configured UV backend for Python3..."
-        upgradepkg --install-new --terse &plgPATH;/uv-0.11.8-x86_64-1.txz
     elif [ "$BACKEND" == "next" ]; then
         echo "Installing user-configured 3.14.x backend for Python3..."
         upgradepkg --install-new --terse &plgPATH;/python3-3.14.4-x86_64-1dwn_slack15.1.txz
@@ -345,8 +345,8 @@ CONFIG=&plgPATH;/&name;.cfg
 if [ -e "$CONFIG" ]; then
     source "$CONFIG"
     if [ "$BACKEND" == "uv" ]; then
+        # We already installed it above, just inform the user what backend was chosen.
         echo "Installing user-configured UV backend for Python3..."
-        upgradepkg --install-new --terse &plgPATH;/uv-0.11.8-x86_64-1.txz
     elif [ "$BACKEND" == "next" ]; then
         echo "Installing user-configured 3.14.x backend for Python3..."
         upgradepkg --install-new --terse &plgPATH;/python3-3.14.4-x86_64-1dwn_slack15.0.txz
