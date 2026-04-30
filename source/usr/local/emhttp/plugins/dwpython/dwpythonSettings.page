@@ -29,23 +29,30 @@ require_once '/usr/local/emhttp/plugins/dwpython/include/dwpython_config.php';
 <input type="hidden" name="#file" value="dwpython/dwpython.cfg">
 
     <dl>
-        <dt>Python3 Backend:</dt>
+        <dt>python3 Package:</dt>
         <dd>
             <strong><?=$dwpython_py_backend?></strong>
         </dd>
     </dl>
 
     <dl>
-        <dt>Python3 pip Backend:</dt>
+        <dt>pip Package:</dt>
         <dd>
             <strong><?=$dwpython_pip_backend?></strong>
         </dd>
     </dl>
 
     <dl>
-        <dt>Python3 Setuptools Backend:</dt>
+        <dt>setuptools Package:</dt>
         <dd>
             <strong><?=$dwpython_st_backend?></strong>
+        </dd>
+    </dl>
+
+    <dl>
+        <dt>uv Package:</dt>
+        <dd>
+            <strong><?=$dwpython_uv_backend?></strong>
         </dd>
     </dl>
 
