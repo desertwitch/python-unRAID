@@ -57,11 +57,11 @@ require_once '/usr/local/emhttp/plugins/dwpython/include/dwpython_config.php';
     </dl>
 
     <dl>
-        <dt>Python3 Backend Branch Switch:</dt>
+        <dt>python3 Branch Switch:</dt>
         <dd>
             <select id="BACKEND" name="BACKEND" size="1">
                 <?
-                echo(mk_option($dwpython_backend, "uv", "uv (no Python)"));
+                echo(mk_option($dwpython_backend, "uv", "None (use uv)"));
                 echo(mk_option($dwpython_backend, "next", "Python 3.14.x"));
                 echo(mk_option($dwpython_backend, "latest", "Python 3.13.x"));
                 echo(mk_option($dwpython_backend, "previous", "Python 3.12.x"));
