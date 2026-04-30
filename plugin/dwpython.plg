@@ -171,7 +171,7 @@ exit 0
 </FILE>
 
 <FILE Name="&plgPATH;/python-setuptools-82.0.1-x86_64-1dwn_slack15.1.txz" Min="6.13.0">
-<URL>&pkgURL;/python-setuptools-82.0.1-x86_64-1dwn_slack15.1.txzz</URL>
+<URL>&pkgURL;/python-setuptools-82.0.1-x86_64-1dwn_slack15.1.txz</URL>
 <MD5>cbb7d31f3950b1c057a4d82b37daa75b</MD5>
 </FILE>
 
