@@ -397,7 +397,7 @@ if [ ! -e /tmp/dwpython-autoexec.sh ]; then
     if [ -x /tmp/dwpython-autoexec.sh ]; then
         echo ""
         echo "Executing 'autoexec.sh' script in background (check SYSLOG)..."
-        (/tmp/dwpython-autoexec.sh 2>&amp;1 | logger -t "dwpython-autoexec") >/dev/null 2>&amp;1 &amp;
+        (HOME="/root" SHELL="/bin/bash" /tmp/dwpython-autoexec.sh 2>&amp;1 | logger -t "dwpython-autoexec") >/dev/null 2>&amp;1 &amp;
     fi
 fi
 echo ""
