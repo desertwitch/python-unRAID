@@ -419,7 +419,7 @@ echo " !!! IT IS NORMAL THAT SOME PACKAGES ARE NOT FOUND"
 echo " !!! KEEP THIS WINDOW OPEN UNTIL COMPLETION IS REPORTED"
 echo "-------------------------------------------------------------"
 echo ""
-uv python uninstall --all
+HOME="/root" SHELL="/bin/bash" uv python uninstall --all
 removepkg --terse &plgPATH;/*.txz
 rm -rf &plgPATH;/*.txz
 rm -rf &plgPATH;/scripts
