@@ -54,6 +54,7 @@ require_once '/usr/local/emhttp/plugins/dwpython/include/dwpython_config.php';
         <dd>
             <select id="BACKEND" name="BACKEND" size="1">
                 <?
+                echo(mk_option($dwpython_backend, "uv", "uv (no Python)"));
                 echo(mk_option($dwpython_backend, "next", "Python 3.14.x"));
                 echo(mk_option($dwpython_backend, "latest", "Python 3.13.x"));
                 echo(mk_option($dwpython_backend, "previous", "Python 3.12.x"));
@@ -66,6 +67,8 @@ require_once '/usr/local/emhttp/plugins/dwpython/include/dwpython_config.php';
 
     <blockquote class="inline_help">
     <p>Selects the version of Python3 (change requires either a plugin reinstall or ideally a reboot).</p>
+    <p>If you choose <a href="https://docs.astral.sh/uv/" target="_blank">uv</a>, you use that to install and manage your Python versions.</p>
+    <p>Utilize the <i>autoexec.sh</i> file (using the editor below) to automatically set up your required environment whenever the server boots.</p>
     </blockquote>
 
     <dl>
