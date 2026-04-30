@@ -29,35 +29,35 @@ require_once '/usr/local/emhttp/plugins/dwpython/include/dwpython_config.php';
 <input type="hidden" name="#file" value="dwpython/dwpython.cfg">
 
     <dl>
-        <dt>python3 Package:</dt>
+        <dt><i>python3</i> Package:</dt>
         <dd>
             <strong><?=$dwpython_py_backend?></strong>
         </dd>
     </dl>
 
     <dl>
-        <dt>pip Package:</dt>
+        <dt><i>pip</i> Package:</dt>
         <dd>
             <strong><?=$dwpython_pip_backend?></strong>
         </dd>
     </dl>
 
     <dl>
-        <dt>setuptools Package:</dt>
+        <dt><i>setuptools</i> Package:</dt>
         <dd>
             <strong><?=$dwpython_st_backend?></strong>
         </dd>
     </dl>
 
     <dl>
-        <dt>uv Package:</dt>
+        <dt><i>uv</i> Package:</dt>
         <dd>
             <strong><?=$dwpython_uv_backend?></strong>
         </dd>
     </dl>
 
     <dl>
-        <dt>python3 Branch Switch:</dt>
+        <dt>Branch Switch:</dt>
         <dd>
             <select id="BACKEND" name="BACKEND" size="1">
                 <?
