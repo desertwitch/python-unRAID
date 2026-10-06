@@ -19,18 +19,8 @@
 <CHANGES>
 ## Python 3 for UNRAID
 MAINTENANCE MODE: With Unraid approaching its transition to Fedora, this package is now moving into maintenance mode. Existing installs will continue to work as they do today, and fixes will be provided on a best-effort basis to keep core functionality running. New features aren't planned, and the UI may not always display perfectly if future Unraid versions should change their layout. If a future Unraid release introduces a breaking change, the maximum supported version will be set at that point to help avoid broken installs, which would likely mark the end of support for this plugin. Thank you for your understanding and continued support.
-###2026.10.06
+### 2026.10.06
 - announce maintenance mode (no functional changes)
-### General Update Advisory: Backend Version Changes
-Beware that Python (and "pip") packages are always tied to their respective Python versions.
-
-Always read the changelog carefully before updating the plugin (watch out for Python version changes).
-
-If the Python version changes between the updates, take note of your installed packages before updating.
-
-A convenient way is using "pip freeze" (before) and "pip install" (after) commands to save/restore packages.
-
-Packages only need re-install updating to a new major/minor version, e.g. 3.12 to 3.13 (NOT 3.12.1 to 3.12.2).
 ### 2026.04.30
 - new: updated python-pip-25.1.1 to python-pip-26.1
 - new: updated python-setuptools-80.9.0 to python-setuptools-82.0.1
